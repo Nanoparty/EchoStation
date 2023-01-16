@@ -181,7 +181,13 @@ func _on_PlatformTimer_timeout():
 
 
 func _on_DamageDetector_body_entered(body):
-	print("Something Hits Player") # Replace with function body.
+	print("collide")
 	if body is Bullet:
 		return
+	print("Enemy Hits Player")
 	take_damage(1)
+	#if body is Spike:
+		#print("Spike Hits Player")
+		#take_damage(1)
+	
+	
