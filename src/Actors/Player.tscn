@@ -354,6 +354,7 @@ texture = ExtResource( 11 )
 
 [node name="HpSprite" type="Sprite" parent="UI"]
 position = Vector2( 26, 31 )
+rotation = 1.5708
 scale = Vector2( 3, 3 )
 texture = ExtResource( 10 )
 hframes = 4
