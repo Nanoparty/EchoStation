@@ -20,6 +20,9 @@ onready var hpBar = $UI/HpSprite
 
 onready var health = 3
 onready var dead = false
+onready var jumpCount = 0
+onready var canDoubleJump = false
+onready var canShoot = false
 
 
 func _ready():
@@ -96,7 +99,7 @@ func _physics_process(_delta):
 	# There are many situations like these where you can reuse existing properties instead of
 	# creating new variables.
 	var is_shooting = false
-	if Input.is_action_just_pressed("shoot" + action_suffix):
+	if Input.is_action_just_pressed("shoot" + action_suffix) and canShoot:
 		is_shooting = gun.shoot(sprite.scale.x)
 		
 	#if health <= 0:
@@ -112,9 +115,25 @@ func set_animation(animation, is_shooting = false):
 		animation_player.play(animation)
 
 func get_direction(falling):
+	var UpVector = 0
+	
+	if is_on_floor() and !falling:
+		jumpCount = 0
+		print("reset jumps")
+	
+	if jumpCount < 2 and !is_on_floor() and Input.is_action_just_pressed("jump" + action_suffix) and canDoubleJump:
+		UpVector = -1
+		jumpCount = 2
+		sound_jump.play()
+		print("In air jump")
+	elif jumpCount == 0 and is_on_floor() and !falling and Input.is_action_just_pressed("jump" + action_suffix):
+		UpVector = -1
+		jumpCount += 1
+		print("ground jump")
+		
 	return Vector2(
 		Input.get_action_strength("move_right" + action_suffix) - Input.get_action_strength("move_left" + action_suffix),
-		-1 if is_on_floor() and !falling and Input.is_action_just_pressed("jump" + action_suffix) else 0
+		UpVector
 	)
 
 
