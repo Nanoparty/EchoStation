@@ -119,17 +119,17 @@ func get_direction(falling):
 	
 	if is_on_floor() and !falling:
 		jumpCount = 0
-		print("reset jumps")
+
 	
 	if jumpCount < 2 and !is_on_floor() and Input.is_action_just_pressed("jump" + action_suffix) and canDoubleJump:
 		UpVector = -1
 		jumpCount = 2
 		sound_jump.play()
-		print("In air jump")
+
 	elif jumpCount == 0 and is_on_floor() and !falling and Input.is_action_just_pressed("jump" + action_suffix):
 		UpVector = -1
 		jumpCount += 1
-		print("ground jump")
+
 		
 	return Vector2(
 		Input.get_action_strength("move_right" + action_suffix) - Input.get_action_strength("move_left" + action_suffix),
@@ -203,6 +203,9 @@ func _on_DamageDetector_body_entered(body):
 	print("collide")
 	if body is Bullet:
 		return
+	if body.name == "DoubleJump":
+		canDoubleJump = true
+		body.queue_free()
 	print("Enemy Hits Player")
 	take_damage(1)
 	#if body is Spike:
