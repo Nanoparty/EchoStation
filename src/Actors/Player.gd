@@ -21,8 +21,12 @@ onready var hpBar = $UI/HpSprite
 onready var health = 3
 onready var dead = false
 onready var jumpCount = 0
-onready var canDoubleJump = false
-onready var canShoot = false
+onready var canDoubleJump = true
+onready var canShoot = true
+
+onready var key1 = false
+onready var key2 = false
+onready var key3 = false
 
 
 func _ready():
