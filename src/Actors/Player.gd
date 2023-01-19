@@ -17,12 +17,15 @@ onready var sound_jump = $Jump
 onready var gun = sprite.get_node(@"Gun")
 onready var detector = $DamageDetector
 onready var hpBar = $UI/HpSprite
+onready var textBox = $UI/Textbox
 
 onready var health = 3
 onready var dead = false
 onready var jumpCount = 0
 onready var canDoubleJump = true
 onready var canShoot = true
+
+onready var canMove = true
 
 onready var key1 = false
 onready var key2 = false
@@ -64,8 +67,14 @@ func _ready():
 #   you can easily move individual functions.
 func _physics_process(_delta):
 	
-	if dead:
+	if dead or textBox.pause:
 		return
+		
+	if Input.is_action_just_pressed("ui_accept"):
+		textBox.queue_text("Text 1 aldkfjla adjsflkasd asdklf dfj asdlf")
+		textBox.queue_text("Text 2 aldkfjla adjsflkasd asdklf dfj asdlf")
+		textBox.queue_text("Text 3 aldkfjla adjsflkasd asdklf dfj asdlf")
+		textBox.queue_text("Text 4 aldkfjla adjsflkasd asdklf dfj asdlf")
 	
 	var falling = false
 	# Fall through platforms
