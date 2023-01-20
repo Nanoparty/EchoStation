@@ -37,6 +37,15 @@ onready var key1 = false
 onready var key2 = false
 onready var key3 = false
 
+onready var lever1 = false
+onready var lever2 = false
+onready var lever3 = false
+
+onready var invulnerable = false
+
+onready var atComputer = false
+onready var atDoor = false
+
 
 func _ready():
 	# Static types are necessary here to avoid warnings.
@@ -84,6 +93,12 @@ func _physics_process(_delta):
 		return
 		
 	update_keys()
+	
+	if Input.is_action_just_pressed("ui_accept") && atComputer:
+		introduction()
+		
+	if Input.is_action_just_pressed("ui_accept") && atDoor:
+		door_locked()
 	
 	var falling = false
 	# Fall through platforms
@@ -155,6 +170,12 @@ func wake_up():
 	textBox.queue_text("Ugh...my servos feel so rusty. Where am I?")
 	textBox.queue_text("It looks like the station, but something feels wrong here...")
 	textBox.queue_text("I better go find out whats happening around here.")
+	
+func introduction():
+	textBox.queue_text("Welcome! I'm A.L.E.X.")
+	
+func door_locked():
+	textBox.queue_text("This door is locked.")
 		
 func set_canDoubleJump():
 	canDoubleJump = true
@@ -206,6 +227,11 @@ func get_direction(falling):
 
 
 func take_damage(damage):
+	if invulnerable:
+		 return
+	invulnerable = true
+	$DamageTimer.start()
+	
 	health -= damage
 	
 	if health == 2:
@@ -221,6 +247,15 @@ func take_damage(damage):
 		$Explode.play(0)
 		set_animation("death")
 		dead = true
+		invulnerable = true
+		$RespawnTimer.start()
+		
+func respawn():
+	var respawnPoint = get_tree().get_root().get_children()[0].get_node("Level").get_node("PlayerSpawn")
+	transform = respawnPoint.transform
+	health = 3
+	hpBar.frame = 3
+	dead = false
 
 # This function calculates a new velocity whenever you need it.
 # It allows you to interrupt jumps.
@@ -277,14 +312,51 @@ func _on_DamageDetector_body_entered(body):
 		#print("Spike Hits Player")
 		#take_damage(1)
 	
+func set_lever1():
+	print("Lever 1 is active")
+	lever1 = true
+	all_levers()
 	
+func set_lever2():
+	print("Lever 2 is active")
+	lever2 = true
+	all_levers()
+	
+func set_lever3():
+	print("Lever 3 is active")
+	lever3 = true
+	all_levers()
 
+func all_levers():
+	if lever1 and lever2 and lever3:
+		print("All levers active")
+		get_tree().get_root().get_children()[0].get_node("Level").get_node("Doors").get_node("Door3").queue_free()
+		get_tree().get_root().get_children()[0].get_node("Level").get_node("Doors").get_node("Door4").queue_free()
 
-func _on_ComputerDetector_body_entered(body):
-	print("computer enter")
+func enter_computer():
 	interactIcon.show()
+	atComputer = true
 
-
-func _on_ComputerDetector_body_exited(body):
-	print("computer leave")
+func exit_computer():
 	interactIcon.hide()
+	atComputer = false
+	
+func enter_door():
+	interactIcon.show()
+	atDoor = true
+	
+func exit_door():
+	interactIcon.hide()
+	atDoor = false
+	
+func disable_invulnerable():
+	invulnerable = false
+
+
+func _on_DamageTimer_timeout():
+	invulnerable = false
+
+
+func _on_RespawnTimer_timeout():
+	invulnerable = false
+	respawn()
