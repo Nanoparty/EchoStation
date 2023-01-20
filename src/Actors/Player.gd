@@ -45,7 +45,7 @@ func _ready():
 	key2Icon.hide()
 	key3Icon.hide()
 	
-	#interactIcon.hide()
+	interactIcon.hide()
 	
 	var camera: Camera2D = $Camera
 	if action_suffix == "_p1":
@@ -271,9 +271,6 @@ func _on_DamageDetector_body_entered(body):
 	print("collide")
 	if body is Bullet:
 		return
-	if body.name == "DoubleJump":
-		canDoubleJump = true
-		body.queue_free()
 	print("Enemy Hits Player")
 	take_damage(1)
 	#if body is Spike:
@@ -281,3 +278,13 @@ func _on_DamageDetector_body_entered(body):
 		#take_damage(1)
 	
 	
+
+
+func _on_ComputerDetector_body_entered(body):
+	print("computer enter")
+	interactIcon.show()
+
+
+func _on_ComputerDetector_body_exited(body):
+	print("computer leave")
+	interactIcon.hide()

@@ -244,7 +244,7 @@ quality/intended_usage/framebuffer_allocation.mobile=1
 2d/snapping/use_gpu_pixel_snap=true
 quality/filters/anisotropic_filter_level=2
 quality/filters/use_nearest_mipmap_filter=true
-environment/default_clear_color=Color( 0.113725, 0.129412, 0.176471, 1 )
+environment/default_clear_color=Color( 0.498039, 0.509804, 0.533333, 1 )
 quality/depth/hdr=false
 quality/2d/use_pixel_snap=true
 

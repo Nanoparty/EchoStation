@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://src/Actors/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/player/player_sprites.png" type="Texture" id=2]
@@ -270,7 +270,6 @@ extents = Vector2( 7.5, 10 )
 
 [sub_resource type="Animation" id=18]
 resource_name = "hover"
-length = 3.0
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:position")
@@ -279,11 +278,14 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 1.5 ),
+"times": PoolRealArray( 0, 0.5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Vector2( 0, -21 ), Vector2( 0, -25 ) ]
 }
+
+[sub_resource type="RectangleShape2D" id=19]
+extents = Vector2( 6.5, 7.5 )
 
 [node name="Player" type="KinematicBody2D"]
 collision_mask = 28
@@ -484,8 +486,8 @@ position = Vector2( 0, -7 )
 wait_time = 0.1
 
 [node name="DamageDetector" type="Area2D" parent="."]
-collision_layer = 258
-collision_mask = 258
+collision_layer = 2306
+collision_mask = 2306
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageDetector"]
 position = Vector2( -1, -8 )
@@ -505,6 +507,16 @@ texture = ExtResource( 21 )
 autoplay = "hover"
 anims/hover = SubResource( 18 )
 
+[node name="ComputerDetector" type="Area2D" parent="."]
+collision_layer = 2048
+collision_mask = 2048
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ComputerDetector"]
+position = Vector2( -0.5, -7.5 )
+shape = SubResource( 19 )
+
 [connection signal="tween_all_completed" from="UI/Textbox/Tween" to="UI/Textbox" method="_on_Tween_tween_all_completed"]
 [connection signal="timeout" from="PlatformTimer" to="." method="_on_PlatformTimer_timeout"]
 [connection signal="body_entered" from="DamageDetector" to="." method="_on_DamageDetector_body_entered"]
+[connection signal="body_entered" from="ComputerDetector" to="." method="_on_ComputerDetector_body_entered"]
+[connection signal="body_exited" from="ComputerDetector" to="." method="_on_ComputerDetector_body_exited"]
