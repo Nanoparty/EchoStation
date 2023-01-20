@@ -18,4 +18,4 @@ visible = false
 [node name="Level" parent="." instance=ExtResource( 3 )]
 
 [node name="Player" parent="Level" instance=ExtResource( 4 )]
-position = Vector2( -649, -29 )
+position = Vector2( -683, -25 )

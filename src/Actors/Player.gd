@@ -19,6 +19,12 @@ onready var detector = $DamageDetector
 onready var hpBar = $UI/HpSprite
 onready var textBox = $UI/Textbox
 
+onready var key1Icon = $UI/Key1
+onready var key2Icon = $UI/Key2
+onready var key3Icon = $UI/Key3
+
+onready var interactIcon = $InteractKey
+
 onready var health = 3
 onready var dead = false
 onready var jumpCount = 0
@@ -34,6 +40,13 @@ onready var key3 = false
 
 func _ready():
 	# Static types are necessary here to avoid warnings.
+	
+	key1Icon.hide()
+	key2Icon.hide()
+	key3Icon.hide()
+	
+	#interactIcon.hide()
+	
 	var camera: Camera2D = $Camera
 	if action_suffix == "_p1":
 		camera.custom_viewport = $"../.."
@@ -70,11 +83,7 @@ func _physics_process(_delta):
 	if dead or textBox.pause:
 		return
 		
-	if Input.is_action_just_pressed("ui_accept"):
-		textBox.queue_text("Text 1 aldkfjla adjsflkasd asdklf dfj asdlf")
-		textBox.queue_text("Text 2 aldkfjla adjsflkasd asdklf dfj asdlf")
-		textBox.queue_text("Text 3 aldkfjla adjsflkasd asdklf dfj asdlf")
-		textBox.queue_text("Text 4 aldkfjla adjsflkasd asdklf dfj asdlf")
+	update_keys()
 	
 	var falling = false
 	# Fall through platforms
@@ -126,6 +135,52 @@ func set_animation(animation, is_shooting = false):
 		if is_shooting:
 			shoot_timer.start()
 		animation_player.play(animation)
+		
+func update_keys():
+	if key1:
+		key1Icon.show()
+	else:
+		key1Icon.hide()
+	if key2:
+		key2Icon.show()
+	else:
+		key2Icon.hide()
+	if key3:
+		key3Icon.show()
+	else:
+		key3Icon.hide()
+		
+func wake_up():
+	textBox.queue_text("[SYSTEM DIAGNOSTICS: PROCESSES REBOOTING...]")
+	textBox.queue_text("Ugh...my servos feel so rusty. Where am I?")
+	textBox.queue_text("It looks like the station, but something feels wrong here...")
+	textBox.queue_text("I better go find out whats happening around here.")
+		
+func set_canDoubleJump():
+	canDoubleJump = true
+	textBox.queue_text("Look at this! My old maneuvering thrusters!")
+	textBox.queue_text("With these I should be able to get around a lot easier.")
+	
+func set_canShoot():
+	canShoot = true
+	textBox.queue_text("Hey! Its my old plasma cutter arm!")
+	textBox.queue_text("Now I should be able to defend myself against those rogue machines.")
+	
+func pickup_Key1():
+	key1 = true
+	textBox.queue_text("This looks like the first security key!")
+	textBox.queue_text("I better give this to A.L.E.X so she can unlock the station controls.")
+	
+func pickup_Key2():
+	key2 = true
+	textBox.queue_text("Nice, the second security key!")
+	textBox.queue_text("Just one more to go.")
+	
+func pickup_Key3():
+	key3 = true
+	textBox.queue_text("The last security key!")
+	textBox.queue_text("Now A.L.E.X should be able to fix the station.")
+	textBox.queue_text("I can't wait for things to return to normal.")
 
 func get_direction(falling):
 	var UpVector = 0

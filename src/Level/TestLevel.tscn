@@ -1068,7 +1068,7 @@ shape = SubResource( 5 )
 
 [node name="Spike2" type="StaticBody2D" parent="Spikes"]
 position = Vector2( -400, 568 )
-collision_layer = 2
+collision_layer = 256
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/Spike2"]
@@ -1081,7 +1081,7 @@ texture = ExtResource( 13 )
 
 [node name="Spike3" type="StaticBody2D" parent="Spikes"]
 position = Vector2( -368, 568 )
-collision_layer = 2
+collision_layer = 256
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/Spike3"]
@@ -1094,7 +1094,7 @@ texture = ExtResource( 13 )
 
 [node name="Spike4" type="StaticBody2D" parent="Spikes"]
 position = Vector2( -312, 568 )
-collision_layer = 2
+collision_layer = 256
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/Spike4"]
@@ -1107,7 +1107,7 @@ texture = ExtResource( 13 )
 
 [node name="Spike5" type="StaticBody2D" parent="Spikes"]
 position = Vector2( -296, 568 )
-collision_layer = 2
+collision_layer = 256
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/Spike5"]
@@ -1120,7 +1120,7 @@ texture = ExtResource( 13 )
 
 [node name="Spike6" type="StaticBody2D" parent="Spikes"]
 position = Vector2( -456, 568 )
-collision_layer = 2
+collision_layer = 256
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/Spike6"]
@@ -1133,7 +1133,7 @@ texture = ExtResource( 13 )
 
 [node name="Spike7" type="StaticBody2D" parent="Spikes"]
 position = Vector2( -472, 568 )
-collision_layer = 2
+collision_layer = 256
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/Spike7"]
@@ -1146,7 +1146,7 @@ texture = ExtResource( 13 )
 
 [node name="Spike8" type="StaticBody2D" parent="Spikes"]
 position = Vector2( -704, 568 )
-collision_layer = 2
+collision_layer = 256
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/Spike8"]
@@ -1159,7 +1159,7 @@ texture = ExtResource( 13 )
 
 [node name="Spike9" type="StaticBody2D" parent="Spikes"]
 position = Vector2( -824, 568 )
-collision_layer = 2
+collision_layer = 256
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/Spike9"]
@@ -1172,7 +1172,7 @@ texture = ExtResource( 13 )
 
 [node name="Spike10" type="StaticBody2D" parent="Spikes"]
 position = Vector2( -824, 472 )
-collision_layer = 2
+collision_layer = 256
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/Spike10"]
@@ -1185,7 +1185,7 @@ texture = ExtResource( 13 )
 
 [node name="Spike11" type="StaticBody2D" parent="Spikes"]
 position = Vector2( -704, 472 )
-collision_layer = 2
+collision_layer = 256
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/Spike11"]
@@ -1198,7 +1198,7 @@ texture = ExtResource( 13 )
 
 [node name="Spike12" type="StaticBody2D" parent="Spikes"]
 position = Vector2( -736, 360 )
-collision_layer = 2
+collision_layer = 256
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/Spike12"]
@@ -1211,7 +1211,7 @@ texture = ExtResource( 13 )
 
 [node name="Spike13" type="StaticBody2D" parent="Spikes"]
 position = Vector2( -848, 360 )
-collision_layer = 2
+collision_layer = 256
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/Spike13"]
@@ -1224,7 +1224,7 @@ texture = ExtResource( 13 )
 
 [node name="Spike14" type="StaticBody2D" parent="Spikes"]
 position = Vector2( -848, 216 )
-collision_layer = 2
+collision_layer = 256
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/Spike14"]
@@ -1237,7 +1237,7 @@ texture = ExtResource( 13 )
 
 [node name="Spike15" type="StaticBody2D" parent="Spikes"]
 position = Vector2( -728, 264 )
-collision_layer = 2
+collision_layer = 256
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/Spike15"]

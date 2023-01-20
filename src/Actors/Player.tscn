@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://src/Actors/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/player/player_sprites.png" type="Texture" id=2]
@@ -17,6 +17,10 @@
 [ext_resource path="res://assets/art/enemy/explosion.png" type="Texture" id=15]
 [ext_resource path="res://assets/art/environment/light_circle.png" type="Texture" id=16]
 [ext_resource path="res://src/Actors/Textbox.gd" type="Script" id=17]
+[ext_resource path="res://assets/art/environment/key3.png" type="Texture" id=18]
+[ext_resource path="res://assets/art/environment/key1.png" type="Texture" id=19]
+[ext_resource path="res://assets/art/environment/key2.png" type="Texture" id=20]
+[ext_resource path="res://assets/art/player/F.png" type="Texture" id=21]
 
 [sub_resource type="Animation" id=1]
 resource_name = "crouch"
@@ -264,6 +268,23 @@ font_data = SubResource( 16 )
 [sub_resource type="RectangleShape2D" id=14]
 extents = Vector2( 7.5, 10 )
 
+[sub_resource type="Animation" id=18]
+resource_name = "hover"
+length = 3.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -21 ), Vector2( 0, -25 ) ]
+}
+
 [node name="Player" type="KinematicBody2D"]
 collision_mask = 28
 script = ExtResource( 1 )
@@ -436,6 +457,21 @@ text = "v"
 
 [node name="Tween" type="Tween" parent="UI/Textbox"]
 
+[node name="Key1" type="Sprite" parent="UI"]
+position = Vector2( 700, 22 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 19 )
+
+[node name="Key2" type="Sprite" parent="UI"]
+position = Vector2( 730, 23 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 20 )
+
+[node name="Key3" type="Sprite" parent="UI"]
+position = Vector2( 760, 23 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 18 )
+
 [node name="Explosion" parent="." instance=ExtResource( 13 )]
 texture = ExtResource( 15 )
 
@@ -448,8 +484,8 @@ position = Vector2( 0, -7 )
 wait_time = 0.1
 
 [node name="DamageDetector" type="Area2D" parent="."]
-collision_layer = 2
-collision_mask = 2
+collision_layer = 258
+collision_mask = 258
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageDetector"]
 position = Vector2( -1, -8 )
@@ -460,6 +496,14 @@ shape = SubResource( 14 )
 visible = false
 texture = ExtResource( 16 )
 texture_scale = 2.0
+
+[node name="InteractKey" type="Sprite" parent="."]
+position = Vector2( 0, -22.8667 )
+texture = ExtResource( 21 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="InteractKey"]
+autoplay = "hover"
+anims/hover = SubResource( 18 )
 
 [connection signal="tween_all_completed" from="UI/Textbox/Tween" to="UI/Textbox" method="_on_Tween_tween_all_completed"]
 [connection signal="timeout" from="PlatformTimer" to="." method="_on_PlatformTimer_timeout"]
