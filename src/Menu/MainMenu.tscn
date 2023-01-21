@@ -1,9 +1,11 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://src/Menu/MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/background/space.jpg" type="Texture" id=2]
 [ext_resource path="res://assets/art/background/title.png" type="Texture" id=3]
 [ext_resource path="res://assets/audio/music/space2.mp3" type="AudioStream" id=4]
+[ext_resource path="res://src/Actors/Textbox.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/art/background/black.png" type="Texture" id=6]
 
 [sub_resource type="Animation" id=11]
 resource_name = "idle"
@@ -157,7 +159,7 @@ custom_styles/normal = SubResource( 7 )
 text = "Quit"
 align = 0
 
-[node name="Label" type="Label" parent="."]
+[node name="copyright" type="Label" parent="."]
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
@@ -173,6 +175,24 @@ stream = ExtResource( 4 )
 volume_db = -8.361
 autoplay = true
 
+[node name="Tween" type="Tween" parent="."]
+
+[node name="TextBoxLayer" type="CanvasLayer" parent="."]
+
+[node name="Textbox" parent="TextBoxLayer" instance=ExtResource( 5 )]
+
+[node name="Blackscreen" type="TextureRect" parent="."]
+modulate = Color( 0, 0, 0, 0 )
+self_modulate = Color( 0, 0, 0, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 6 )
+expand = true
+
+[node name="Tween2" type="Tween" parent="."]
+
 [connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_StartButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/OptionsButton" to="." method="_on_OptionsButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_QuitButton_pressed"]
+[connection signal="tween_all_completed" from="Tween" to="." method="_on_Tween_tween_all_completed"]
+[connection signal="tween_all_completed" from="Tween2" to="." method="_on_Tween2_tween_all_completed"]

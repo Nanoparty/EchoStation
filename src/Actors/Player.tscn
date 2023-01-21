@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://src/Actors/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/player/player_sprites.png" type="Texture" id=2]
@@ -16,7 +16,7 @@
 [ext_resource path="res://src/Actors/Effects/Explode.tscn" type="PackedScene" id=14]
 [ext_resource path="res://assets/art/enemy/explosion.png" type="Texture" id=15]
 [ext_resource path="res://assets/art/environment/light_circle.png" type="Texture" id=16]
-[ext_resource path="res://src/Actors/Textbox.gd" type="Script" id=17]
+[ext_resource path="res://src/Actors/Textbox.tscn" type="PackedScene" id=17]
 [ext_resource path="res://assets/art/environment/key3.png" type="Texture" id=18]
 [ext_resource path="res://assets/art/environment/key1.png" type="Texture" id=19]
 [ext_resource path="res://assets/art/environment/key2.png" type="Texture" id=20]
@@ -276,20 +276,6 @@ tracks/0/keys = {
 [sub_resource type="RectangleShape2D" id=11]
 extents = Vector2( 7.5, 7.5 )
 
-[sub_resource type="StyleBoxFlat" id=15]
-bg_color = Color( 0, 0, 0, 1 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color( 1, 1, 1, 1 )
-
-[sub_resource type="DynamicFontData" id=16]
-font_path = "res://assets/fonts/Emulogic-zrEw.ttf"
-
-[sub_resource type="DynamicFont" id=17]
-font_data = SubResource( 16 )
-
 [sub_resource type="RectangleShape2D" id=14]
 extents = Vector2( 7.5, 10 )
 
@@ -425,65 +411,7 @@ texture = ExtResource( 10 )
 hframes = 4
 frame = 3
 
-[node name="Textbox" type="Node" parent="UI"]
-script = ExtResource( 17 )
-
-[node name="TextboxContainer" type="MarginContainer" parent="UI/Textbox"]
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 16.0
-margin_top = -68.0
-margin_right = -16.0
-margin_bottom = -16.0
-
-[node name="Panel" type="Panel" parent="UI/Textbox/TextboxContainer"]
-margin_right = 768.0
-margin_bottom = 52.0
-custom_styles/panel = SubResource( 15 )
-
-[node name="MarginContainer" type="MarginContainer" parent="UI/Textbox/TextboxContainer"]
-margin_right = 768.0
-margin_bottom = 52.0
-
-[node name="Panel" type="Panel" parent="UI/Textbox/TextboxContainer/MarginContainer"]
-visible = false
-margin_right = 768.0
-margin_bottom = 52.0
-
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/Textbox/TextboxContainer/MarginContainer"]
-margin_right = 768.0
-margin_bottom = 52.0
-
-[node name="Start" type="Label" parent="UI/Textbox/TextboxContainer/MarginContainer/HBoxContainer"]
-margin_right = 16.0
-margin_bottom = 20.0
-size_flags_vertical = 0
-custom_fonts/font = SubResource( 17 )
-text = "*"
-
-[node name="Label" type="Label" parent="UI/Textbox/TextboxContainer/MarginContainer/HBoxContainer"]
-margin_left = 20.0
-margin_right = 748.0
-margin_bottom = 52.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_fonts/font = SubResource( 17 )
-text = "Placeholder Text! The quick brown fox ju"
-autowrap = true
-clip_text = true
-
-[node name="End" type="Label" parent="UI/Textbox/TextboxContainer/MarginContainer/HBoxContainer"]
-margin_left = 752.0
-margin_top = 32.0
-margin_right = 768.0
-margin_bottom = 52.0
-rect_min_size = Vector2( 16, 20 )
-size_flags_vertical = 8
-custom_fonts/font = SubResource( 17 )
-text = "v"
-
-[node name="Tween" type="Tween" parent="UI/Textbox"]
+[node name="Textbox" parent="UI" instance=ExtResource( 17 )]
 
 [node name="Key1" type="Sprite" parent="UI"]
 position = Vector2( 700, 22 )
@@ -549,7 +477,6 @@ one_shot = true
 [node name="RespawnTimer" type="Timer" parent="."]
 one_shot = true
 
-[connection signal="tween_all_completed" from="UI/Textbox/Tween" to="UI/Textbox" method="_on_Tween_tween_all_completed"]
 [connection signal="timeout" from="PlatformTimer" to="." method="_on_PlatformTimer_timeout"]
 [connection signal="body_entered" from="DamageDetector" to="." method="_on_DamageDetector_body_entered"]
 [connection signal="body_entered" from="ComputerDetector" to="." method="_on_ComputerDetector_body_entered"]

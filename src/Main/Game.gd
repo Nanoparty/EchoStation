@@ -17,28 +17,16 @@ func _unhandled_input(event):
 	if event.is_action_pressed("toggle_fullscreen"):
 		OS.window_fullscreen = not OS.window_fullscreen
 		get_tree().set_input_as_handled()
-	# The GlobalControls node, in the Stage scene, is set to process even
-	# when the game is paused, so this code keeps running.
-	# To see that, select GlobalControls, and scroll down to the Pause category
-	# in the inspector.
+	
 	elif event.is_action_pressed("toggle_pause"):
+		print("toggle pause")
 		var tree = get_tree()
 		tree.paused = not tree.paused
+		var pause_menu = $Level/InterfaceLayer/PauseMenu
 		if tree.paused:
 			print("open pause menu")
-			#_pause_menu.open()
+			pause_menu.open()
 		else:
 			print("close pause menu")
-			#_pause_menu.close()
+			pause_menu.close()
 		get_tree().set_input_as_handled()
-
-	elif event.is_action_pressed("splitscreen"):
-		if name == "Splitscreen":
-			# We need to clean up a little bit first to avoid Viewport errors.
-			$Black/SplitContainer/ViewportContainer1.free()
-			$Black.queue_free()
-			# warning-ignore:return_value_discarded
-			get_tree().change_scene("res://src/Main/Game.tscn")
-		else:
-			# warning-ignore:return_value_discarded
-			get_tree().change_scene("res://src/Main/Splitscreen.tscn")

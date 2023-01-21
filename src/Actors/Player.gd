@@ -25,6 +25,8 @@ onready var key3Icon = $UI/Key3
 
 onready var interactIcon = $InteractKey
 
+onready var fadeIn = false
+
 onready var health = 3
 onready var dead = false
 onready var jumpCount = 0

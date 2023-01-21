@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=2]
+[gd_scene load_steps=63 format=2]
 
 [ext_resource path="res://src/Level/MainTiles.tres" type="TileSet" id=1]
 [ext_resource path="res://src/Actors/Drone1.tscn" type="PackedScene" id=2]
@@ -38,6 +38,8 @@
 [ext_resource path="res://src/UserInterface/InterfaceLayer.tscn" type="PackedScene" id=36]
 [ext_resource path="res://assets/audio/music/space3.mp3" type="AudioStream" id=37]
 [ext_resource path="res://assets/audio/music/space_combat.mp3" type="AudioStream" id=38]
+[ext_resource path="res://assets/art/background/black.png" type="Texture" id=39]
+[ext_resource path="res://src/Level/FadeIn.gd" type="Script" id=40]
 
 [sub_resource type="Animation" id=8]
 resource_name = "New Anim"
@@ -2194,6 +2196,7 @@ hframes = 2
 
 [node name="Music1" type="AudioStreamPlayer" parent="Music"]
 stream = ExtResource( 37 )
+autoplay = true
 script = ExtResource( 9 )
 
 [node name="Music2" type="AudioStreamPlayer" parent="Music"]
@@ -2202,6 +2205,20 @@ script = ExtResource( 9 )
 
 [node name="BossMusic" type="AudioStreamPlayer2D" parent="Music"]
 stream = ExtResource( 38 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Blackscreen" type="TextureRect" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 39 )
+expand = true
+script = ExtResource( 40 )
+
+[node name="FadeInTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="FadeInTween" type="Tween" parent="."]
 
 [connection signal="body_entered" from="Interactibles/Console" to="Interactibles/Console" method="_on_Console_body_entered"]
 [connection signal="body_exited" from="Interactibles/Console" to="Interactibles/Console" method="_on_Console_body_exited"]

@@ -8,6 +8,7 @@ onready var end_symbol = $TextboxContainer/MarginContainer/HBoxContainer/End
 onready var label = $TextboxContainer/MarginContainer/HBoxContainer/Label
 
 onready var pause = false
+onready var complete = false
 
 enum State {
 	READY,
@@ -28,6 +29,7 @@ func _process(delta):
 		State.READY:
 			if !text_queue.empty():
 				pause = true
+				complete = false
 				display_text()
 		State.READING:
 			if Input.is_action_just_pressed("ui_accept"):
@@ -40,6 +42,7 @@ func _process(delta):
 				change_state(State.READY)
 				if text_queue.empty():
 					pause = false
+					complete = true
 					hide_textbox()
 				
 func queue_text(next_text):
