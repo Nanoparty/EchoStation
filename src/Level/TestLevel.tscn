@@ -39,7 +39,7 @@
 [ext_resource path="res://assets/audio/music/space3.mp3" type="AudioStream" id=37]
 [ext_resource path="res://assets/audio/music/space_combat.mp3" type="AudioStream" id=38]
 [ext_resource path="res://assets/art/background/black.png" type="Texture" id=39]
-[ext_resource path="res://src/Level/FadeIn.gd" type="Script" id=40]
+[ext_resource path="res://assets/art/environment/side_keys.png" type="Texture" id=40]
 
 [sub_resource type="Animation" id=8]
 resource_name = "New Anim"
@@ -237,9 +237,10 @@ pause_mode = 1
 script = ExtResource( 5 )
 
 [node name="Player" parent="." instance=ExtResource( 35 )]
-position = Vector2( 500, 332 )
+position = Vector2( -45, 559 )
 
 [node name="InterfaceLayer" parent="." instance=ExtResource( 36 )]
+visible = false
 
 [node name="PlayerSpawn" type="Node2D" parent="."]
 position = Vector2( -32, 568 )
@@ -1265,7 +1266,7 @@ shape = SubResource( 18 )
 [node name="Computer" type="Sprite" parent="Interactibles"]
 position = Vector2( 16, 528 )
 texture = ExtResource( 6 )
-hframes = 4
+hframes = 5
 
 [node name="Key Slots" type="Sprite" parent="Interactibles"]
 position = Vector2( 16, 496 )
@@ -2126,6 +2127,16 @@ texture = ExtResource( 23 )
 autoplay = "idle"
 anims/idle = SubResource( 15 )
 
+[node name="Key4" type="Area2D" parent="Keys"]
+position = Vector2( 64, 562 )
+script = ExtResource( 27 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Keys/Key4"]
+shape = SubResource( 14 )
+
+[node name="Sprite" type="Sprite" parent="Keys/Key4"]
+texture = ExtResource( 23 )
+
 [node name="Key2" type="Area2D" parent="Keys"]
 position = Vector2( 792, 200 )
 script = ExtResource( 28 )
@@ -2140,6 +2151,16 @@ texture = ExtResource( 25 )
 autoplay = "idle"
 anims/idle = SubResource( 16 )
 
+[node name="Key5" type="Area2D" parent="Keys"]
+position = Vector2( 91, 563 )
+script = ExtResource( 28 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Keys/Key5"]
+shape = SubResource( 14 )
+
+[node name="Sprite" type="Sprite" parent="Keys/Key5"]
+texture = ExtResource( 25 )
+
 [node name="Key3" type="Area2D" parent="Keys"]
 position = Vector2( -896, -392 )
 script = ExtResource( 29 )
@@ -2153,6 +2174,16 @@ texture = ExtResource( 24 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Keys/Key3"]
 autoplay = "idle"
 anims/idle = SubResource( 17 )
+
+[node name="Key6" type="Area2D" parent="Keys"]
+position = Vector2( 124, 563 )
+script = ExtResource( 29 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Keys/Key6"]
+shape = SubResource( 14 )
+
+[node name="Sprite" type="Sprite" parent="Keys/Key6"]
+texture = ExtResource( 24 )
 
 [node name="Levers" type="Node2D" parent="."]
 
@@ -2206,19 +2237,26 @@ script = ExtResource( 9 )
 [node name="BossMusic" type="AudioStreamPlayer2D" parent="Music"]
 stream = ExtResource( 38 )
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="FadeIn" type="CanvasLayer" parent="."]
+visible = false
 
-[node name="Blackscreen" type="TextureRect" parent="CanvasLayer"]
+[node name="Blackscreen" type="TextureRect" parent="FadeIn"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource( 39 )
 expand = true
-script = ExtResource( 40 )
 
 [node name="FadeInTimer" type="Timer" parent="."]
+wait_time = 3.0
 one_shot = true
+autostart = true
 
 [node name="FadeInTween" type="Tween" parent="."]
+
+[node name="LeftRight Controls" type="Sprite" parent="."]
+visible = false
+position = Vector2( 434, 279 )
+texture = ExtResource( 40 )
 
 [connection signal="body_entered" from="Interactibles/Console" to="Interactibles/Console" method="_on_Console_body_entered"]
 [connection signal="body_exited" from="Interactibles/Console" to="Interactibles/Console" method="_on_Console_body_exited"]
@@ -2281,8 +2319,12 @@ one_shot = true
 [connection signal="body_entered" from="Upgrades/DoubleJump" to="Upgrades/DoubleJump" method="_on_DoubleJump_body_entered"]
 [connection signal="body_entered" from="Upgrades/Blaster" to="Upgrades/Blaster" method="_on_Blaster_body_entered"]
 [connection signal="body_entered" from="Keys/Key1" to="Keys/Key1" method="_on_Key1_body_entered"]
+[connection signal="body_entered" from="Keys/Key4" to="Keys/Key4" method="_on_Key1_body_entered"]
 [connection signal="body_entered" from="Keys/Key2" to="Keys/Key2" method="_on_Key2_body_entered"]
+[connection signal="body_entered" from="Keys/Key5" to="Keys/Key5" method="_on_Key2_body_entered"]
 [connection signal="body_entered" from="Keys/Key3" to="Keys/Key3" method="_on_Key3_body_entered"]
+[connection signal="body_entered" from="Keys/Key6" to="Keys/Key6" method="_on_Key3_body_entered"]
 [connection signal="body_entered" from="Levers/Lever1" to="Levers/Lever1" method="_on_Lever1_body_entered"]
 [connection signal="body_entered" from="Levers/Lever2" to="Levers/Lever2" method="_on_Lever2_body_entered"]
 [connection signal="body_entered" from="Levers/Lever3" to="Levers/Lever3" method="_on_Lever3_body_entered"]
+[connection signal="timeout" from="FadeInTimer" to="Player" method="_on_FadeInTimer_timeout"]

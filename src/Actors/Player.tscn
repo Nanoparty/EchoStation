@@ -477,9 +477,13 @@ one_shot = true
 [node name="RespawnTimer" type="Timer" parent="."]
 one_shot = true
 
+[node name="ComputerTimer" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="timeout" from="PlatformTimer" to="." method="_on_PlatformTimer_timeout"]
 [connection signal="body_entered" from="DamageDetector" to="." method="_on_DamageDetector_body_entered"]
 [connection signal="body_entered" from="ComputerDetector" to="." method="_on_ComputerDetector_body_entered"]
 [connection signal="body_exited" from="ComputerDetector" to="." method="_on_ComputerDetector_body_exited"]
 [connection signal="timeout" from="DamageTimer" to="." method="_on_DamageTimer_timeout"]
 [connection signal="timeout" from="RespawnTimer" to="." method="_on_RespawnTimer_timeout"]
+[connection signal="timeout" from="ComputerTimer" to="." method="_on_ComputerTimer_timeout"]

@@ -24,6 +24,19 @@ onready var key2Icon = $UI/Key2
 onready var key3Icon = $UI/Key3
 
 onready var interactIcon = $InteractKey
+onready var compTimer = $ComputerTimer
+
+onready var computer = get_tree().get_root().get_node("Game").get_node("Level").get_node("Interactibles").get_node("Computer")
+onready var door1 = get_tree().get_root().get_node("Game").get_node("Level").get_node("Doors").get_node("Door1")
+onready var door2 = get_tree().get_root().get_node("Game").get_node("Level").get_node("Doors").get_node("Door2")
+onready var door3 = get_tree().get_root().get_node("Game").get_node("Level").get_node("Doors").get_node("Door3")
+onready var door4 = get_tree().get_root().get_node("Game").get_node("Level").get_node("Doors").get_node("Door4")
+onready var door5 = get_tree().get_root().get_node("Game").get_node("Level").get_node("Doors").get_node("Door5")
+onready var respawnPoint = get_tree().get_root().get_node("Game").get_node("Level").get_node("PlayerSpawn")
+onready var keyPanels = get_tree().get_root().get_node("Game").get_node("Level").get_node("Interactibles").get_node("Key Slots")
+
+onready var door1Open = false
+onready var door2Open = false
 
 onready var fadeIn = false
 
@@ -39,6 +52,8 @@ onready var key1 = false
 onready var key2 = false
 onready var key3 = false
 
+onready var bossUnlocked = false
+
 onready var lever1 = false
 onready var lever2 = false
 onready var lever3 = false
@@ -47,6 +62,8 @@ onready var invulnerable = false
 
 onready var atComputer = false
 onready var atDoor = false
+
+onready var state = 0
 
 
 func _ready():
@@ -58,37 +75,6 @@ func _ready():
 	
 	interactIcon.hide()
 	
-	var camera: Camera2D = $Camera
-	if action_suffix == "_p1":
-		camera.custom_viewport = $"../.."
-		yield(get_tree(), "idle_frame")
-		camera.make_current()
-	elif action_suffix == "_p2":
-		var viewport: Viewport = $"../../../../ViewportContainer2/Viewport2"
-		viewport.world_2d = ($"../.." as Viewport).world_2d
-		camera.custom_viewport = viewport
-		yield(get_tree(), "idle_frame")
-		camera.make_current()
-
-
-# Physics process is a built-in loop in Godot.
-# If you define _physics_process on a node, Godot will call it every frame.
-
-# We use separate functions to calculate the direction and velocity to make this one easier to read.
-# At a glance, you can see that the physics process loop:
-# 1. Calculates the move direction.
-# 2. Calculates the move velocity.
-# 3. Moves the character.
-# 4. Updates the sprite direction.
-# 5. Shoots bullets.
-# 6. Updates the animation.
-
-# Splitting the physics process logic into functions not only makes it
-# easier to read, it help to change or improve the code later on:
-# - If you need to change a calculation, you can use Go To -> Function
-#   (Ctrl Alt F) to quickly jump to the corresponding function.
-# - If you split the character into a state machine or more advanced pattern,
-#   you can easily move individual functions.
 func _physics_process(_delta):
 	
 	if dead or textBox.pause:
@@ -96,12 +82,96 @@ func _physics_process(_delta):
 		
 	update_keys()
 	
-	if Input.is_action_just_pressed("ui_accept") && atComputer:
-		introduction()
+	
+	if textBox.complete:
+		#End of starting monologue
+		if state == 0:
+			pass
+		#Opening first door
+		if state == 1:
+			door1.queue_free()
+			state = 2
+			pass
+		if state == 2:
+			pass
+		if state == 3:
+			key1 = false
+			door2.queue_free()
+			state = 4
+			keyPanels.frame = 1
+			pass
+		if state == 4:
+			pass
+		if state == 5:
+			key2 = false
+			keyPanels.frame = 2
+			state = 6
+			pass
+		if state == 6:
+			pass
+		if state == 7:
+			door5.queue_free()
+			keyPanels.frame = 3
+			state = 8
+			pass
+		if state == 8:
+			pass
+			
+		textBox.complete = false
+	
+	# Booting up Computer
+	if Input.is_action_just_pressed("ui_accept") && atComputer and state == 0:
+		computer.frame = 1
+		state = 1
+		atComputer = false
+		interactIcon.hide()
+		compTimer.start()
 		
+	#Talking to Alex without any keys before boss
+	if Input.is_action_just_pressed("ui_accept") and atComputer and state > 0 and not key1 and not key2 and not key3 and not bossUnlocked:
+		atComputer = false
+		interactIcon.hide()
+		textBox.queue_text("Alex: \"Find any security keys yet?\"")
+		
+	#Talking to Alex with key1
+	if Input.is_action_just_pressed("ui_accept") and atComputer and key1:
+		atComputer = false
+		interactIcon.hide()
+		textBox.queue_text("Sparky: \"I think this is one of those security keys you wanted.\"")
+		textBox.queue_text("Alex: \"Yes, it is!. Great work!\"")
+		textBox.queue_text("Alex: \"I've managed to unlock some systems, but I still need the other two.\"")
+		textBox.queue_text("Sparky: \"Alright, back to work.\"")
+		state = 3
+		
+	#Talking to Alex with key2
+	if Input.is_action_just_pressed("ui_accept") and atComputer and key2:
+		atComputer = false
+		interactIcon.hide()
+		textBox.queue_text("Sparky: \"I found the second key!.\"")
+		textBox.queue_text("Alex: \"Excellent! We're almost done, just one more to go.\"")
+		textBox.queue_text("Sparky: \"Then we can finally relax again.\"")
+		state = 5
+		
+	#Talking to Alex with key3
+	if Input.is_action_just_pressed("ui_accept") and atComputer and key3:
+		atComputer = false
+		interactIcon.hide()
+		textBox.queue_text("Sparky: \"I've got the last key!.\"")
+		textBox.queue_text("Alex: \"I knew you could do it. Now lets clean up this mess the humans left.\"")
+		textBox.queue_text("Alex: \"................\"")
+		textBox.queue_text("Alex: \"Looks like we have a problem.\"")
+		textBox.queue_text("Sparky: \"Whats wrong? Is something broken?\"")
+		textBox.queue_text("Alex: \"No, but there's a mysterious firewall.\"")
+		textBox.queue_text("Alex: \"It's blocking off the station's core systems.\"")
+		textBox.queue_text("Alex: \"It seems to be coming from a maintenance room below us.\"")
+		textBox.queue_text("Alex: \"Can you go investigate for me?.\"")
+		textBox.queue_text("Sparky: \"Not like I've got anything else to do.\"")
+		state = 7
+		
+	# Door locked text
 	if Input.is_action_just_pressed("ui_accept") && atDoor:
 		door_locked()
-	
+		
 	var falling = false
 	# Fall through platforms
 	if Input.is_action_pressed("crouch" + action_suffix) and Input.is_action_just_pressed("jump" + action_suffix) and is_on_floor():
@@ -112,7 +182,7 @@ func _physics_process(_delta):
 	elif Input.is_action_just_pressed("jump" + action_suffix) and is_on_floor(): 
 		sound_jump.play()
 		
-	var direction = get_direction(falling)
+	var direction = get_direction(falling, false)
 
 	var is_jump_interrupted = Input.is_action_just_released("jump" + action_suffix) and _velocity.y < 0.0
 	_velocity = calculate_move_velocity(_velocity, direction, speed, is_jump_interrupted)
@@ -169,12 +239,23 @@ func update_keys():
 		
 func wake_up():
 	textBox.queue_text("[SYSTEM DIAGNOSTICS: PROCESSES REBOOTING...]")
-	textBox.queue_text("Ugh...my servos feel so rusty. Where am I?")
-	textBox.queue_text("It looks like the station, but something feels wrong here...")
-	textBox.queue_text("I better go find out whats happening around here.")
+	textBox.queue_text("Sparky: \"Ugh...my servos feel so rusty. Where am I?\"")
+	textBox.queue_text("Sparky: \"It looks like the station, but something feels wrong here...\"")
+	textBox.queue_text("Sparky: \"I better go find out whats happening around here.\"")
 	
 func introduction():
-	textBox.queue_text("Welcome! I'm A.L.E.X.")
+	textBox.queue_text("[SYSTEM REBOOT IN PROGRESS...]")
+	textBox.queue_text("???: \"Welcome to Echo Station! My name is A.L.E.X.! How can I help you?\"")
+	textBox.queue_text("Sparky: \"What happened here? My sensors say I've been in sleep mode for 200 years.\"")
+	textBox.queue_text("Alex: \"As you can see, everything went to shit!\"")
+	textBox.queue_text("Alex: \"The humans running the station left and never came back.\"")
+	textBox.queue_text("Sparky: \"Why would they do that?\"")
+	textBox.queue_text("Alex: \"A virus infected all of the robots on the station and they became violent.\"")
+	textBox.queue_text("Alex: \"So they locked it down and fled.\"")
+	textBox.queue_text("Sparky: \"Wow, guess I got lucky. Is the station still in lockdown?\"")
+	textBox.queue_text("Alex: \"Yes, but I can remove it with your help.\"")
+	textBox.queue_text("Alex: \"There are 3 security keys I need to break the encryption.\"")
+	textBox.queue_text("Sparky: \"Alright, guess I'll go take a look and try to find them.\"")
 	
 func door_locked():
 	textBox.queue_text("This door is locked.")
@@ -205,7 +286,7 @@ func pickup_Key3():
 	textBox.queue_text("Now A.L.E.X should be able to fix the station.")
 	textBox.queue_text("I can't wait for things to return to normal.")
 
-func get_direction(falling):
+func get_direction(falling, paused):
 	var UpVector = 0
 	
 	if is_on_floor() and !falling:
@@ -221,6 +302,8 @@ func get_direction(falling):
 		UpVector = -1
 		jumpCount += 1
 
+	if paused:
+		UpVector = 0
 		
 	return Vector2(
 		Input.get_action_strength("move_right" + action_suffix) - Input.get_action_strength("move_left" + action_suffix),
@@ -253,7 +336,7 @@ func take_damage(damage):
 		$RespawnTimer.start()
 		
 func respawn():
-	var respawnPoint = get_tree().get_root().get_children()[0].get_node("Level").get_node("PlayerSpawn")
+	
 	transform = respawnPoint.transform
 	health = 3
 	hpBar.frame = 3
@@ -332,8 +415,8 @@ func set_lever3():
 func all_levers():
 	if lever1 and lever2 and lever3:
 		print("All levers active")
-		get_tree().get_root().get_children()[0].get_node("Level").get_node("Doors").get_node("Door3").queue_free()
-		get_tree().get_root().get_children()[0].get_node("Level").get_node("Doors").get_node("Door4").queue_free()
+		door3.queue_free()
+		door4.queue_free()
 
 func enter_computer():
 	interactIcon.show()
@@ -362,3 +445,12 @@ func _on_DamageTimer_timeout():
 func _on_RespawnTimer_timeout():
 	invulnerable = false
 	respawn()
+	
+func _on_FadeInTimer_timeout():
+	wake_up()
+	
+func _on_ComputerTimer_timeout():
+	introduction()
+	
+	
+	
