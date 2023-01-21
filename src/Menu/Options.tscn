@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://src/Menu/Options.gd" type="Script" id=1]
 
@@ -9,6 +9,51 @@ font_path = "res://assets/fonts/Emulogic-zrEw.ttf"
 size = 20
 font_data = SubResource( 1 )
 
+[sub_resource type="StyleBoxEmpty" id=9]
+
+[sub_resource type="StyleBoxEmpty" id=10]
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0, 0.796078, 1, 0.392157 )
+corner_radius_top_right = 3
+corner_radius_bottom_left = 3
+expand_margin_right = 10.0
+anti_aliasing = false
+
+[sub_resource type="StyleBoxEmpty" id=11]
+
+[sub_resource type="StyleBoxEmpty" id=4]
+
+[sub_resource type="StyleBoxEmpty" id=12]
+
+[sub_resource type="StyleBoxEmpty" id=13]
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0, 0.796078, 1, 0.392157 )
+corner_radius_top_right = 3
+corner_radius_bottom_left = 3
+expand_margin_right = 10.0
+anti_aliasing = false
+
+[sub_resource type="StyleBoxEmpty" id=14]
+
+[sub_resource type="StyleBoxEmpty" id=6]
+
+[sub_resource type="StyleBoxEmpty" id=15]
+
+[sub_resource type="StyleBoxEmpty" id=16]
+
+[sub_resource type="StyleBoxFlat" id=7]
+bg_color = Color( 0, 0.796078, 1, 0.392157 )
+corner_radius_top_right = 3
+corner_radius_bottom_left = 3
+expand_margin_right = 10.0
+anti_aliasing = false
+
+[sub_resource type="StyleBoxEmpty" id=17]
+
+[sub_resource type="StyleBoxEmpty" id=8]
+
 [node name="Options" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -18,30 +63,45 @@ script = ExtResource( 1 )
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 25.0
-margin_top = -129.0
-margin_right = 172.0
+margin_top = -154.0
+margin_right = 192.0
 
 [node name="MusicButton" type="Button" parent="VBoxContainer"]
 margin_right = 192.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 192, 32 )
 custom_fonts/font = SubResource( 2 )
+custom_styles/hover = SubResource( 9 )
+custom_styles/pressed = SubResource( 10 )
+custom_styles/focus = SubResource( 3 )
+custom_styles/disabled = SubResource( 11 )
+custom_styles/normal = SubResource( 4 )
 text = "Music ON"
 align = 0
 
 [node name="SoundsButton" type="Button" parent="VBoxContainer"]
 margin_top = 36.0
 margin_right = 192.0
-margin_bottom = 68.0
+margin_bottom = 62.0
 custom_fonts/font = SubResource( 2 )
+custom_styles/hover = SubResource( 12 )
+custom_styles/pressed = SubResource( 13 )
+custom_styles/focus = SubResource( 5 )
+custom_styles/disabled = SubResource( 14 )
+custom_styles/normal = SubResource( 6 )
 text = "SFX ON"
 align = 0
 
 [node name="ApplyButton" type="Button" parent="VBoxContainer"]
-margin_top = 72.0
+margin_top = 66.0
 margin_right = 192.0
-margin_bottom = 104.0
+margin_bottom = 92.0
 custom_fonts/font = SubResource( 2 )
+custom_styles/hover = SubResource( 15 )
+custom_styles/pressed = SubResource( 16 )
+custom_styles/focus = SubResource( 7 )
+custom_styles/disabled = SubResource( 17 )
+custom_styles/normal = SubResource( 8 )
 text = "Apply"
 align = 0
 

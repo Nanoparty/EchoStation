@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/space_combat.mp3-97a6bca1b28aa8f13961fc18d1bb425c.mp3str"
+
+[deps]
+
+source_file="res://assets/audio/music/space_combat.mp3"
+dest_files=[ "res://.import/space_combat.mp3-97a6bca1b28aa8f13961fc18d1bb425c.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

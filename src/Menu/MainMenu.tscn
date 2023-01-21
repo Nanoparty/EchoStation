@@ -1,8 +1,9 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://src/Menu/MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/background/space.jpg" type="Texture" id=2]
 [ext_resource path="res://assets/art/background/title.png" type="Texture" id=3]
+[ext_resource path="res://assets/audio/music/space2.mp3" type="AudioStream" id=4]
 
 [sub_resource type="Animation" id=11]
 resource_name = "idle"
@@ -30,35 +31,57 @@ font_path = "res://assets/fonts/Emulogic-zrEw.ttf"
 size = 20
 font_data = SubResource( 1 )
 
+[sub_resource type="StyleBoxEmpty" id=12]
+
+[sub_resource type="StyleBoxEmpty" id=13]
+
 [sub_resource type="StyleBoxFlat" id=9]
-bg_color = Color( 0, 0.796078, 1, 0.631373 )
-corner_radius_top_left = 3
+bg_color = Color( 0, 0.796078, 1, 0.392157 )
 corner_radius_top_right = 3
-corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 expand_margin_right = 10.0
+anti_aliasing = false
+
+[sub_resource type="StyleBoxEmpty" id=14]
 
 [sub_resource type="StyleBoxEmpty" id=4]
 
 [sub_resource type="ImageTexture" id=5]
 
+[sub_resource type="StyleBoxEmpty" id=15]
+
+[sub_resource type="StyleBoxEmpty" id=16]
+
 [sub_resource type="StyleBoxFlat" id=8]
-bg_color = Color( 0, 0.796078, 1, 0.631373 )
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
+bg_color = Color( 0, 0.796078, 1, 0.392157 )
+corner_radius_top_right = 3
+corner_radius_bottom_left = 3
 expand_margin_right = 10.0
+anti_aliasing = false
+
+[sub_resource type="StyleBoxEmpty" id=17]
 
 [sub_resource type="StyleBoxEmpty" id=7]
 
+[sub_resource type="StyleBoxEmpty" id=18]
+
+[sub_resource type="StyleBoxEmpty" id=19]
+
 [sub_resource type="StyleBoxFlat" id=10]
-bg_color = Color( 0, 0.796078, 1, 0.631373 )
-corner_radius_top_left = 3
+bg_color = Color( 0, 0.796078, 1, 0.392157 )
 corner_radius_top_right = 3
-corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 expand_margin_right = 10.0
+anti_aliasing = false
+
+[sub_resource type="StyleBoxEmpty" id=20]
+
+[sub_resource type="DynamicFontData" id=21]
+font_path = "res://assets/fonts/Emulogic-zrEw.ttf"
+
+[sub_resource type="DynamicFont" id=22]
+size = 10
+font_data = SubResource( 21 )
 
 [node name="Menu" type="Control"]
 anchor_right = 1.0
@@ -85,8 +108,8 @@ anims/idle = SubResource( 11 )
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 25.0
-margin_top = -129.0
-margin_right = 152.0
+margin_top = -154.0
+margin_right = 140.0
 
 [node name="StartButton" type="Button" parent="VBoxContainer"]
 margin_right = 140.0
@@ -95,7 +118,10 @@ focus_neighbour_top = NodePath("../QuitButton")
 focus_neighbour_bottom = NodePath("../OptionsButton")
 theme = SubResource( 3 )
 custom_fonts/font = SubResource( 2 )
+custom_styles/hover = SubResource( 12 )
+custom_styles/pressed = SubResource( 13 )
 custom_styles/focus = SubResource( 9 )
+custom_styles/disabled = SubResource( 14 )
 custom_styles/normal = SubResource( 4 )
 text = "Start"
 icon = SubResource( 5 )
@@ -108,7 +134,10 @@ margin_bottom = 56.0
 focus_neighbour_top = NodePath("../StartButton")
 focus_neighbour_bottom = NodePath("../QuitButton")
 custom_fonts/font = SubResource( 2 )
+custom_styles/hover = SubResource( 15 )
+custom_styles/pressed = SubResource( 16 )
 custom_styles/focus = SubResource( 8 )
+custom_styles/disabled = SubResource( 17 )
 custom_styles/normal = SubResource( 7 )
 text = "Options"
 align = 0
@@ -120,10 +149,29 @@ margin_bottom = 86.0
 focus_neighbour_top = NodePath("../OptionsButton")
 focus_neighbour_bottom = NodePath("../StartButton")
 custom_fonts/font = SubResource( 2 )
+custom_styles/hover = SubResource( 18 )
+custom_styles/pressed = SubResource( 19 )
 custom_styles/focus = SubResource( 10 )
+custom_styles/disabled = SubResource( 20 )
 custom_styles/normal = SubResource( 7 )
 text = "Quit"
 align = 0
+
+[node name="Label" type="Label" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -310.0
+margin_top = -14.0
+margin_right = -10.0
+custom_fonts/font = SubResource( 22 )
+text = "© Dispixel 2023 | Nathan Foote"
+
+[node name="MenuMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+volume_db = -8.361
+autoplay = true
 
 [connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_StartButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/OptionsButton" to="." method="_on_OptionsButton_pressed"]
