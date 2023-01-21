@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=2]
+[gd_scene load_steps=69 format=2]
 
 [ext_resource path="res://src/Level/MainTiles.tres" type="TileSet" id=1]
 [ext_resource path="res://src/Actors/Drone1.tscn" type="PackedScene" id=2]
@@ -240,6 +240,28 @@ extents = Vector2( 8, 17 )
 
 [sub_resource type="RectangleShape2D" id=29]
 extents = Vector2( 160, 5 )
+
+[sub_resource type="Environment" id=30]
+fog_enabled = true
+fog_color = Color( 0.643137, 0.666667, 0.686275, 1 )
+
+[sub_resource type="Shader" id=31]
+code = "shader_type canvas_item;
+
+uniform vec4 color: hint_color;
+uniform float multiplier = 0.2;
+uniform float softness = 3.0;
+
+void fragment(){
+	float value = distance(UV, vec2(0.5));
+	COLOR = vec4(color.rgb, smoothstep(multiplier, softness, value));
+}"
+
+[sub_resource type="ShaderMaterial" id=32]
+shader = SubResource( 31 )
+shader_param/color = Color( 0, 0, 0, 1 )
+shader_param/multiplier = -0.037
+shader_param/softness = 1.27
 
 [node name="Level" type="Node2D"]
 pause_mode = 1
@@ -2300,6 +2322,16 @@ position = Vector2( 16, 1048 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BossTrigger"]
 position = Vector2( 0, 5 )
 shape = SubResource( 29 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 30 )
+
+[node name="Vingette" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="Vingette"]
+material = SubResource( 32 )
+anchor_right = 1.0
+anchor_bottom = 1.0
 
 [connection signal="body_entered" from="Interactibles/Console" to="Interactibles/Console" method="_on_Console_body_entered"]
 [connection signal="body_exited" from="Interactibles/Console" to="Interactibles/Console" method="_on_Console_body_exited"]
