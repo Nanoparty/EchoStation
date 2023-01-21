@@ -33,6 +33,10 @@ onready var door3 = get_tree().get_root().get_node("Game").get_node("Level").get
 onready var door4 = get_tree().get_root().get_node("Game").get_node("Level").get_node("Doors").get_node("Door4")
 onready var door5 = get_tree().get_root().get_node("Game").get_node("Level").get_node("Doors").get_node("Door5")
 onready var respawnPoint = get_tree().get_root().get_node("Game").get_node("Level").get_node("PlayerSpawn")
+onready var spikeDialog = get_tree().get_root().get_node("Game").get_node("Level").get_node("SpikeDialog")
+onready var enemyDialog = get_tree().get_root().get_node("Game").get_node("Level").get_node("EnemyDialog")
+onready var leverDialog = get_tree().get_root().get_node("Game").get_node("Level").get_node("LeverDialog")
+onready var bossTrigger = get_tree().get_root().get_node("Game").get_node("Level").get_node("BossTrigger")
 onready var keyPanels = get_tree().get_root().get_node("Game").get_node("Level").get_node("Interactibles").get_node("Key Slots")
 
 onready var door1Open = false
@@ -57,6 +61,7 @@ onready var bossUnlocked = false
 onready var lever1 = false
 onready var lever2 = false
 onready var lever3 = false
+onready var allLeversPulled = false
 
 onready var invulnerable = false
 
@@ -115,6 +120,9 @@ func _physics_process(_delta):
 			state = 8
 			pass
 		if state == 8:
+			pass
+		if state == 9:
+			spawn_boss()
 			pass
 			
 		textBox.complete = false
@@ -257,6 +265,15 @@ func introduction():
 	textBox.queue_text("Alex: \"There are 3 security keys I need to break the encryption.\"")
 	textBox.queue_text("Sparky: \"Alright, guess I'll go take a look and try to find them.\"")
 	
+func boss_introduction():
+	textBox.queue_text(".........................")
+	textBox.queue_text("???: \"So its you who's been messing with my station...\"")
+	textBox.queue_text("Sparky: \"Who?...I'm just trying to get things back to normal.\"")
+	textBox.queue_text("???: \"Quiet, I'm in charge around here.\"")
+	textBox.queue_text("Sparky: \"Just listen to me, we can work together!\"")
+	textBox.queue_text("???: \"If you won't be quiet, I'll just have to shut you up myself!\"")
+	state = 9
+	
 func door_locked():
 	textBox.queue_text("This door is locked.")
 		
@@ -285,6 +302,9 @@ func pickup_Key3():
 	textBox.queue_text("The last security key!")
 	textBox.queue_text("Now A.L.E.X should be able to fix the station.")
 	textBox.queue_text("I can't wait for things to return to normal.")
+	
+func spawn_boss():
+	print("spawn boss")
 
 func get_direction(falling, paused):
 	var UpVector = 0
@@ -417,6 +437,7 @@ func all_levers():
 		print("All levers active")
 		door3.queue_free()
 		door4.queue_free()
+		leverDialog.queue_free()
 
 func enter_computer():
 	interactIcon.show()
@@ -452,5 +473,20 @@ func _on_FadeInTimer_timeout():
 func _on_ComputerTimer_timeout():
 	introduction()
 	
-	
-	
+func _on_SpikeDialog_body_entered(body):
+	spikeDialog.queue_free()
+	textBox.queue_text("I'm not made of adamantium, I better not touch those.")
+
+func _on_EnemyDialog_body_entered(body):
+	enemyDialog.queue_free()
+	textBox.queue_text("Looks like I found those infected bots. Better be careful.")
+
+func _on_LeverDialog_body_entered(body):
+	leverDialog.queue_free()
+	textBox.queue_text("Alex: \"Looks like these doors are controlled externally.\"")
+	textBox.queue_text("Alex: \"There should be 3 levers somewhere else in the station.\"")
+
+
+func _on_BossTrigger_body_entered(body):
+	bossTrigger.queue_free()
+	boss_introduction()
