@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=2]
+[gd_scene load_steps=61 format=2]
 
 [ext_resource path="res://src/Level/MainTiles.tres" type="TileSet" id=1]
 [ext_resource path="res://src/Actors/Drone1.tscn" type="PackedScene" id=2]
@@ -7,7 +7,7 @@
 [ext_resource path="res://src/Level/Level.gd" type="Script" id=5]
 [ext_resource path="res://assets/art/environment/computer_panel.png" type="Texture" id=6]
 [ext_resource path="res://src/Level/ZoneCamera.gd" type="Script" id=7]
-[ext_resource path="res://assets/audio/music/music.ogg" type="AudioStream" id=8]
+[ext_resource path="res://assets/audio/music/space_factory.mp3" type="AudioStream" id=8]
 [ext_resource path="res://src/Level/Music.gd" type="Script" id=9]
 [ext_resource path="res://src/Actors/Drone2.tscn" type="PackedScene" id=10]
 [ext_resource path="res://assets/art/environment/console.png" type="Texture" id=11]
@@ -34,6 +34,10 @@
 [ext_resource path="res://src/Level/Lever2.gd" type="Script" id=32]
 [ext_resource path="res://src/Level/Lever3.gd" type="Script" id=33]
 [ext_resource path="res://src/Objects/Door.gd" type="Script" id=34]
+[ext_resource path="res://src/Actors/Player.tscn" type="PackedScene" id=35]
+[ext_resource path="res://src/UserInterface/InterfaceLayer.tscn" type="PackedScene" id=36]
+[ext_resource path="res://assets/audio/music/space3.mp3" type="AudioStream" id=37]
+[ext_resource path="res://assets/audio/music/space_combat.mp3" type="AudioStream" id=38]
 
 [sub_resource type="Animation" id=8]
 resource_name = "New Anim"
@@ -229,6 +233,11 @@ extents = Vector2( 8, 8 )
 [node name="Level" type="Node2D"]
 pause_mode = 1
 script = ExtResource( 5 )
+
+[node name="Player" parent="." instance=ExtResource( 35 )]
+position = Vector2( 500, 332 )
+
+[node name="InterfaceLayer" parent="." instance=ExtResource( 36 )]
 
 [node name="PlayerSpawn" type="Node2D" parent="."]
 position = Vector2( -32, 568 )
@@ -1237,10 +1246,6 @@ position = Vector2( 160, -624 )
 [node name="Enemy41" parent="Enemies" instance=ExtResource( 10 )]
 position = Vector2( -72, -704 )
 
-[node name="Music" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 8 )
-script = ExtResource( 9 )
-
 [node name="Interactibles" type="Node" parent="."]
 
 [node name="Console" type="Area2D" parent="Interactibles"]
@@ -2184,6 +2189,19 @@ shape = SubResource( 21 )
 position = Vector2( 168, -760 )
 texture = ExtResource( 30 )
 hframes = 2
+
+[node name="Music" type="Node2D" parent="."]
+
+[node name="Music1" type="AudioStreamPlayer" parent="Music"]
+stream = ExtResource( 37 )
+script = ExtResource( 9 )
+
+[node name="Music2" type="AudioStreamPlayer" parent="Music"]
+stream = ExtResource( 8 )
+script = ExtResource( 9 )
+
+[node name="BossMusic" type="AudioStreamPlayer2D" parent="Music"]
+stream = ExtResource( 38 )
 
 [connection signal="body_entered" from="Interactibles/Console" to="Interactibles/Console" method="_on_Console_body_entered"]
 [connection signal="body_exited" from="Interactibles/Console" to="Interactibles/Console" method="_on_Console_body_exited"]

@@ -18,6 +18,7 @@ func show_menu():
 
 func _on_StartButton_pressed():
 	get_tree().change_scene("res://src/Level/TestLevel.tscn")
+	queue_free()
 
 func _on_OptionsButton_pressed():
 	hide_menu()

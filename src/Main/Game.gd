@@ -1,12 +1,4 @@
 extends Node
-# This class contains controls that should always be accessible, like pausing
-# the game or toggling the window full-screen.
-
-
-# The "_" prefix is a convention to indicate that variables are private,
-# that is to say, another node or script should not access them.
-onready var _pause_menu = $InterfaceLayer/PauseMenu
-
 
 func _init():
 	OS.min_window_size = OS.window_size
@@ -33,9 +25,11 @@ func _unhandled_input(event):
 		var tree = get_tree()
 		tree.paused = not tree.paused
 		if tree.paused:
-			_pause_menu.open()
+			print("open pause menu")
+			#_pause_menu.open()
 		else:
-			_pause_menu.close()
+			print("close pause menu")
+			#_pause_menu.close()
 		get_tree().set_input_as_handled()
 
 	elif event.is_action_pressed("splitscreen"):
