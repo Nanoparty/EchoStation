@@ -298,6 +298,8 @@ func wake_up():
 	textBox.queue_text("[SYSTEM DIAGNOSTICS: PROCESSES REBOOTING...]")
 	textBox.queue_text("Sparky: \"Ugh...my servos feel so rusty. Where am I?\"")
 	textBox.queue_text("Sparky: \"It looks like the station, but something feels wrong here...\"")
+	textBox.queue_text("Sparky: \"Seems like I'm missing a few of my parts.\"")
+	textBox.queue_text("Sparky: \"Looks like I'll need some reassembly.\"")
 	textBox.queue_text("Sparky: \"I better go find out whats happening around here.\"")
 	
 func respawn_text():
