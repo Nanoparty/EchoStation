@@ -37,6 +37,7 @@ onready var spikeDialog = get_tree().get_root().get_node("Game").get_node("Level
 onready var enemyDialog = get_tree().get_root().get_node("Game").get_node("Level").get_node("EnemyDialog")
 onready var leverDialog = get_tree().get_root().get_node("Game").get_node("Level").get_node("LeverDialog")
 onready var bossTrigger = get_tree().get_root().get_node("Game").get_node("Level").get_node("BossTrigger")
+onready var bossGate = get_tree().get_root().get_node("Game").get_node("Level").get_node("BossGate")
 onready var keyPanels = get_tree().get_root().get_node("Game").get_node("Level").get_node("Interactibles").get_node("Key Slots")
 
 onready var door1Open = false
@@ -73,7 +74,8 @@ onready var state = 0
 
 func _ready():
 	# Static types are necessary here to avoid warnings.
-	
+	bossGate.get_node("CollisionShape2D").disabled = true
+	bossGate.hide()
 	key1Icon.hide()
 	key2Icon.hide()
 	key3Icon.hide()
@@ -251,6 +253,9 @@ func wake_up():
 	textBox.queue_text("Sparky: \"It looks like the station, but something feels wrong here...\"")
 	textBox.queue_text("Sparky: \"I better go find out whats happening around here.\"")
 	
+func respawn_text():
+	textBox.queue_text("Alex: \"Careful, spare parts don't grow on trees you know.\"")
+	
 func introduction():
 	textBox.queue_text("[SYSTEM REBOOT IN PROGRESS...]")
 	textBox.queue_text("???: \"Welcome to Echo Station! My name is A.L.E.X.! How can I help you?\"")
@@ -361,6 +366,7 @@ func respawn():
 	health = 3
 	hpBar.frame = 3
 	dead = false
+	respawn_text()
 
 # This function calculates a new velocity whenever you need it.
 # It allows you to interrupt jumps.
@@ -413,9 +419,6 @@ func _on_DamageDetector_body_entered(body):
 		return
 	print("Enemy Hits Player")
 	take_damage(1)
-	#if body is Spike:
-		#print("Spike Hits Player")
-		#take_damage(1)
 	
 func set_lever1():
 	print("Lever 1 is active")
@@ -489,4 +492,6 @@ func _on_LeverDialog_body_entered(body):
 
 func _on_BossTrigger_body_entered(body):
 	bossTrigger.queue_free()
+	bossGate.get_node("CollisionShape2D").disabled = false
+	bossGate.show()
 	boss_introduction()

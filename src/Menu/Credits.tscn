@@ -1,0 +1,168 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://assets/art/background/space.jpg" type="Texture" id=1]
+[ext_resource path="res://assets/art/background/title.png" type="Texture" id=2]
+[ext_resource path="res://assets/fonts/new_dynamicfont.tres" type="DynamicFont" id=3]
+[ext_resource path="res://src/Menu/focus.tres" type="StyleBox" id=4]
+[ext_resource path="res://src/Menu/Credits.gd" type="Script" id=5]
+
+[sub_resource type="StyleBoxEmpty" id=6]
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[sub_resource type="StyleBoxEmpty" id=4]
+
+[sub_resource type="StyleBoxEmpty" id=5]
+
+[node name="Credits" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 5 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="Background" type="TextureRect" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 1 )
+expand = true
+
+[node name="Title" type="TextureRect" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -50.0
+margin_bottom = -50.0
+texture = ExtResource( 2 )
+expand = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -220.0
+margin_top = -326.0
+margin_right = 220.0
+
+[node name="ProgrammingDesign" type="Label" parent="CanvasLayer/VBoxContainer"]
+modulate = Color( 1, 1, 1, 0 )
+margin_right = 440.0
+margin_bottom = 26.0
+custom_fonts/font = ExtResource( 3 )
+text = "Programming & Design:"
+
+[node name="Nathan" type="Label" parent="CanvasLayer/VBoxContainer"]
+modulate = Color( 1, 1, 1, 0 )
+margin_top = 30.0
+margin_right = 440.0
+margin_bottom = 56.0
+custom_fonts/font = ExtResource( 3 )
+text = "Nathan Foote"
+align = 2
+
+[node name="Art" type="Label" parent="CanvasLayer/VBoxContainer"]
+modulate = Color( 1, 1, 1, 0 )
+margin_top = 60.0
+margin_right = 440.0
+margin_bottom = 86.0
+custom_fonts/font = ExtResource( 3 )
+text = "Artwork:"
+
+[node name="ArtPack" type="Label" parent="CanvasLayer/VBoxContainer"]
+modulate = Color( 1, 1, 1, 0 )
+margin_top = 90.0
+margin_right = 440.0
+margin_bottom = 116.0
+custom_fonts/font = ExtResource( 3 )
+text = "--------------"
+align = 2
+
+[node name="Music" type="Label" parent="CanvasLayer/VBoxContainer"]
+modulate = Color( 1, 1, 1, 0 )
+margin_top = 120.0
+margin_right = 440.0
+margin_bottom = 146.0
+custom_fonts/font = ExtResource( 3 )
+text = "Music:"
+
+[node name="MenuMusic" type="Label" parent="CanvasLayer/VBoxContainer"]
+modulate = Color( 1, 1, 1, 0 )
+margin_top = 150.0
+margin_right = 440.0
+margin_bottom = 176.0
+custom_fonts/font = ExtResource( 3 )
+text = "------------------"
+align = 2
+
+[node name="Song1" type="Label" parent="CanvasLayer/VBoxContainer"]
+modulate = Color( 1, 1, 1, 0 )
+margin_top = 180.0
+margin_right = 440.0
+margin_bottom = 206.0
+custom_fonts/font = ExtResource( 3 )
+text = "---------------------"
+align = 2
+
+[node name="Song2" type="Label" parent="CanvasLayer/VBoxContainer"]
+modulate = Color( 1, 1, 1, 0 )
+margin_top = 210.0
+margin_right = 440.0
+margin_bottom = 236.0
+custom_fonts/font = ExtResource( 3 )
+text = "----------------------"
+align = 2
+
+[node name="BossMusic" type="Label" parent="CanvasLayer/VBoxContainer"]
+modulate = Color( 1, 1, 1, 0 )
+margin_top = 240.0
+margin_right = 440.0
+margin_bottom = 266.0
+custom_fonts/font = ExtResource( 3 )
+text = "---------------------"
+align = 2
+
+[node name="Continue" type="Button" parent="CanvasLayer/VBoxContainer"]
+modulate = Color( 1, 1, 1, 0 )
+margin_top = 270.0
+margin_right = 440.0
+margin_bottom = 296.0
+custom_fonts/font = ExtResource( 3 )
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 2 )
+custom_styles/focus = ExtResource( 4 )
+custom_styles/disabled = SubResource( 4 )
+custom_styles/normal = SubResource( 5 )
+text = "Continue"
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[node name="Tween1" type="Tween" parent="."]
+
+[node name="Tween2" type="Tween" parent="."]
+
+[node name="Tween3" type="Tween" parent="."]
+
+[node name="Tween4" type="Tween" parent="."]
+
+[node name="Tween5" type="Tween" parent="."]
+
+[node name="Tween6" type="Tween" parent="."]
+
+[node name="Tween7" type="Tween" parent="."]
+
+[node name="Tween8" type="Tween" parent="."]
+
+[node name="Tween9" type="Tween" parent="."]
+
+[node name="Tween10" type="Tween" parent="."]
+
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/Continue" to="." method="_on_Continue_pressed"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

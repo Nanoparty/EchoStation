@@ -18,4 +18,7 @@ func _on_body_entered(body):
 	if body is Enemy:
 		body.destroy()
 		queue_free()
+	if body is Boss1:
+		body.take_damage()
+		queue_free()
 	
