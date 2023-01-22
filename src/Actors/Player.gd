@@ -38,6 +38,7 @@ onready var enemyDialog = get_tree().get_root().get_node("Game").get_node("Level
 onready var leverDialog = get_tree().get_root().get_node("Game").get_node("Level").get_node("LeverDialog")
 onready var bossTrigger = get_tree().get_root().get_node("Game").get_node("Level").get_node("BossTrigger")
 onready var bossGate = get_tree().get_root().get_node("Game").get_node("Level").get_node("BossGate")
+onready var bossHealth = get_tree().get_root().get_node("Game").get_node("Level").get_node("BossHealth")
 onready var keyPanels = get_tree().get_root().get_node("Game").get_node("Level").get_node("Interactibles").get_node("Key Slots")
 
 onready var door1Open = false
@@ -494,4 +495,5 @@ func _on_BossTrigger_body_entered(body):
 	bossTrigger.queue_free()
 	bossGate.get_node("CollisionShape2D").disabled = false
 	bossGate.show()
+	bossHealth.show()
 	boss_introduction()

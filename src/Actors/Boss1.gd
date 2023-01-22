@@ -18,8 +18,15 @@ onready var floor_detector_right = $FloorDetectorRight
 onready var sprite = $Sprite
 onready var animation_player = $AnimationPlayer
 onready var attack_timer = $AttackTimer
+onready var shield = $Shield
+
+onready var healthbar = get_tree().get_root().get_node("Game").get_node("Level").get_node("BossHealth").get_node("ProgressBar")
 
 onready var laser
+
+onready var spawned = false
+onready var phase4 = false
+onready var phase12 = false
 
 onready var health = 20
 onready var direction = "right"
@@ -30,10 +37,37 @@ func _ready():
 	speed = Vector2(100.0, 350.0)
 	_velocity.x = speed.x
 	attack_timer.start()
+	shield.hide()
 
 func _physics_process(_delta):
 	
-	if _state == State.CHARGING or _state == State.ATTACK:
+	healthbar.value = health
+	
+	if health <= 0:
+		animation_player.play("destroy")
+	
+	if health == 4 and not phase4:
+		phase4 = true
+		if _state == State.ATTACK:
+			get_node("LaserBeam").queue_free()
+		_state = State.INVINCIBLE
+		shield.show()
+		if not spawned:
+			spawn_laser_drone()
+			spawned = true
+			
+	if health == 12  and not phase12:
+		phase12 = true
+		if _state == State.ATTACK:
+			get_node("LaserBeam").queue_free()
+		_state = State.INVINCIBLE
+		shield.show()
+		if not spawned:
+			spawn_laser_drone()
+			spawned = true
+		
+	
+	if _state == State.CHARGING or _state == State.ATTACK or _state == State.INVINCIBLE:
 		tempVelocity = _velocity.x
 		_velocity.x = 0
 		var animation = get_new_animation()
@@ -42,6 +76,8 @@ func _physics_process(_delta):
 		return
 	elif _velocity.x == 0:
 		_velocity.x = speed.x * sprite.scale.x
+		
+	
 	
 	# If the enemy encounters a wall or an edge, the horizontal velocity is flipped.
 	if not floor_detector_left.is_colliding():
@@ -80,6 +116,10 @@ func destroy():
 	_state = State.DEAD
 	_velocity = Vector2.ZERO
 	
+func spawn_laser_drone():
+	var drone1 = load("res://src/Actors/LaserDrone1.tscn").instance()
+	get_tree().get_root().get_node("Game").get_node("Level").add_child(drone1)
+	
 
 func get_new_animation():
 	var animation_new = ""
@@ -94,6 +134,8 @@ func get_new_animation():
 			animation_new = "attack"
 	elif _state == State.DEAD:
 		animation_new = "destroy"
+	elif _state == State.INVINCIBLE:
+		animation_new = "idle"
 	return animation_new
 
 
@@ -119,6 +161,12 @@ func spawn_laser():
 func despawn_laser():
 	print("despawn laser")
 	get_node("LaserBeam").queue_free()
+	_state = State.WALKING
+	attack_timer.start()
+	
+func end_lasers():
+	spawned = false
+	shield.hide()
 	_state = State.WALKING
 	attack_timer.start()
 	

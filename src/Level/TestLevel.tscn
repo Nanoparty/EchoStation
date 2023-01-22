@@ -1,4 +1,4 @@
-[gd_scene load_steps=73 format=2]
+[gd_scene load_steps=78 format=2]
 
 [ext_resource path="res://src/Level/MainTiles.tres" type="TileSet" id=1]
 [ext_resource path="res://src/Actors/Drone1.tscn" type="PackedScene" id=2]
@@ -43,6 +43,9 @@
 [ext_resource path="res://src/Level/FadeOut.gd" type="Script" id=41]
 [ext_resource path="res://src/Actors/Boss1.tscn" type="PackedScene" id=42]
 [ext_resource path="res://assets/art/enemy/bossgate.png" type="Texture" id=43]
+[ext_resource path="res://assets/fonts/new_dynamicfont.tres" type="DynamicFont" id=44]
+[ext_resource path="res://src/Level/BossHealth.gd" type="Script" id=45]
+[ext_resource path="res://assets/art/enemy/hpbarTop.png" type="Texture" id=46]
 
 [sub_resource type="Animation" id=8]
 resource_name = "New Anim"
@@ -269,12 +272,22 @@ shader_param/softness = 1.27
 [sub_resource type="RectangleShape2D" id=33]
 extents = Vector2( 32, 8 )
 
+[sub_resource type="StyleBoxFlat" id=34]
+bg_color = Color( 1, 0.309804, 0.470588, 1 )
+border_color = Color( 1, 1, 1, 1 )
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id=35]
+bg_color = Color( 0.0431373, 0.0509804, 0.0666667, 1 )
+border_color = Color( 1, 1, 1, 1 )
+anti_aliasing = false
+
 [node name="Level" type="Node2D"]
 pause_mode = 1
 script = ExtResource( 5 )
 
 [node name="Player" parent="." instance=ExtResource( 35 )]
-position = Vector2( -128, 984 )
+position = Vector2( 99, 761 )
 
 [node name="InterfaceLayer" parent="." instance=ExtResource( 36 )]
 visible = false
@@ -2363,6 +2376,36 @@ texture = ExtResource( 43 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BossGate"]
 shape = SubResource( 33 )
+
+[node name="BossHealth" type="Node2D" parent="."]
+position = Vector2( -40, 904 )
+script = ExtResource( 45 )
+
+[node name="ProgressBar" type="ProgressBar" parent="BossHealth"]
+margin_left = -24.0
+margin_top = 8.0
+margin_right = 135.0
+margin_bottom = 19.0
+custom_colors/font_color = Color( 1, 0.309804, 0.470588, 1 )
+custom_fonts/font = ExtResource( 44 )
+custom_styles/fg = SubResource( 34 )
+custom_styles/bg = SubResource( 35 )
+max_value = 20.0
+value = 5.0
+percent_visible = false
+
+[node name="Label" type="Label" parent="BossHealth"]
+margin_left = 38.0
+margin_top = -4.0
+margin_right = 78.0
+margin_bottom = 10.0
+custom_fonts/font = ExtResource( 44 )
+text = "Kyle"
+align = 1
+
+[node name="Sprite" type="Sprite" parent="BossHealth"]
+position = Vector2( 56, 14 )
+texture = ExtResource( 46 )
 
 [connection signal="body_entered" from="Interactibles/Console" to="Interactibles/Console" method="_on_Console_body_entered"]
 [connection signal="body_exited" from="Interactibles/Console" to="Interactibles/Console" method="_on_Console_body_exited"]
