@@ -13,4 +13,8 @@ onready var animation_player = $AnimationPlayer
 # Click the AnimationPlayer node to see the animation timeline.
 func _on_body_entered(_body):
 	animation_player.play("picked")
+	#var playerStats = get_node("/root/PlayerStats")
+	#player_vars.health -= 10
+	PlayerStats.coins += 1
+	print("Coints:" + str(PlayerStats.coins))
 	_body.emit_signal("collect_coin")

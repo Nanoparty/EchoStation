@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://assets/art/background/space.jpg" type="Texture" id=1]
 [ext_resource path="res://assets/art/background/title.png" type="Texture" id=2]
 [ext_resource path="res://assets/fonts/new_dynamicfont.tres" type="DynamicFont" id=3]
 [ext_resource path="res://src/Menu/focus.tres" type="StyleBox" id=4]
 [ext_resource path="res://src/Menu/End.gd" type="Script" id=5]
+[ext_resource path="res://assets/audio/music/space2.mp3" type="AudioStream" id=6]
 
 [sub_resource type="StyleBoxEmpty" id=6]
 
@@ -109,6 +110,10 @@ autostart = true
 [node name="ScoreTween" type="Tween" parent="."]
 
 [node name="ContinueTween" type="Tween" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+autoplay = true
 
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/Continue" to="." method="_on_Continue_pressed"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

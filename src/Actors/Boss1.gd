@@ -24,6 +24,8 @@ onready var healthbar = get_tree().get_root().get_node("Game").get_node("Level")
 
 onready var laser
 
+onready var ded = false
+
 onready var spawned = false
 onready var phase4 = false
 onready var phase12 = false
@@ -44,7 +46,15 @@ func _physics_process(_delta):
 	healthbar.value = health
 	
 	if health <= 0:
+		if _state == State.ATTACK:
+			get_node("LaserBeam").queue_free()
 		animation_player.play("destroy")
+		$DeathTimer.start()
+		if not ded:
+			ded = true
+			PlayerStats.enemies += 1
+			get_tree().get_root().get_node("Game").get_node("Level").get_node("Interactibles").get_node("Console2").canCollide = true
+			get_tree().get_root().get_node("Game").get_node("Level").get_node("Player").boss_kill()
 	
 	if health == 4 and not phase4:
 		phase4 = true
@@ -170,3 +180,7 @@ func end_lasers():
 	_state = State.WALKING
 	attack_timer.start()
 	
+
+
+func _on_DeathTimer_timeout():
+	get_tree().get_root().get_node("Game").get_node("Level").get_node("Player").boss_kill()

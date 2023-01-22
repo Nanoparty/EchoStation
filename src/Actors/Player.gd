@@ -39,18 +39,27 @@ onready var leverDialog = get_tree().get_root().get_node("Game").get_node("Level
 onready var bossTrigger = get_tree().get_root().get_node("Game").get_node("Level").get_node("BossTrigger")
 onready var bossGate = get_tree().get_root().get_node("Game").get_node("Level").get_node("BossGate")
 onready var bossHealth = get_tree().get_root().get_node("Game").get_node("Level").get_node("BossHealth")
+onready var bossSpawn = get_tree().get_root().get_node("Game").get_node("Level").get_node("BossSpawn")
+onready var FadeOut = get_tree().get_root().get_node("Game").get_node("Level").get_node("FadeOut")
+onready var FadeOutTween = get_tree().get_root().get_node("Game").get_node("Level").get_node("FadeOutTween")
+onready var FadeOutTimer = get_tree().get_root().get_node("Game").get_node("Level").get_node("FadeOutTimer")
 onready var keyPanels = get_tree().get_root().get_node("Game").get_node("Level").get_node("Interactibles").get_node("Key Slots")
+onready var music1 = get_tree().get_root().get_node("Game").get_node("Level").get_node("Music").get_node("Music1")
+onready var music2 = get_tree().get_root().get_node("Game").get_node("Level").get_node("Music").get_node("Music2")
+onready var bossMusic = get_tree().get_root().get_node("Game").get_node("Level").get_node("Music").get_node("BossMusic")
 
 onready var door1Open = false
 onready var door2Open = false
 
 onready var fadeIn = false
 
+onready var canTriggerBoss = true
+
 onready var health = 3
 onready var dead = false
 onready var jumpCount = 0
-onready var canDoubleJump = true
-onready var canShoot = true
+onready var canDoubleJump = false
+onready var canShoot = false
 
 onready var canMove = true
 
@@ -59,6 +68,7 @@ onready var key2 = false
 onready var key3 = false
 
 onready var bossUnlocked = false
+onready var bossSpawned = false
 
 onready var lever1 = false
 onready var lever2 = false
@@ -69,6 +79,8 @@ onready var invulnerable = false
 
 onready var atComputer = false
 onready var atDoor = false
+
+onready var atFinalConsole = false
 
 onready var state = 0
 
@@ -90,6 +102,8 @@ func _physics_process(_delta):
 		
 	update_keys()
 	
+
+	
 	
 	if textBox.complete:
 		#End of starting monologue
@@ -99,6 +113,7 @@ func _physics_process(_delta):
 		if state == 1:
 			door1.queue_free()
 			state = 2
+			
 			pass
 		if state == 2:
 			pass
@@ -119,6 +134,7 @@ func _physics_process(_delta):
 			pass
 		if state == 7:
 			door5.queue_free()
+			bossUnlocked = true
 			keyPanels.frame = 3
 			state = 8
 			pass
@@ -126,7 +142,22 @@ func _physics_process(_delta):
 			pass
 		if state == 9:
 			spawn_boss()
+			bossSpawned = true
+			music2.stop()
+			music1.stop()
+			bossMusic.play()
+			state = 10
 			pass
+		if state == 10:
+			#enable console
+			pass
+		if state == 11:
+			pass
+		if state == 12:
+			#transition to end screen
+			get_tree().get_root().get_node("Game").get_node("Level").fade_out()
+			pass
+		
 			
 		textBox.complete = false
 	
@@ -143,6 +174,18 @@ func _physics_process(_delta):
 		atComputer = false
 		interactIcon.hide()
 		textBox.queue_text("Alex: \"Find any security keys yet?\"")
+		
+	#Talking to Alex after all keys before boss
+	if Input.is_action_just_pressed("ui_accept") and atComputer and bossUnlocked and not bossSpawned:
+		atComputer = false
+		interactIcon.hide()
+		textBox.queue_text("Alex: \"There's something strange just below us...\"")
+	
+	#Talking to Alex after all keys after boss
+	if Input.is_action_just_pressed("ui_accept") and atComputer and bossUnlocked and bossSpawned:
+		atComputer = false
+		interactIcon.hide()
+		textBox.queue_text("Alex: \"Go kick his ass!\"")
 		
 	#Talking to Alex with key1
 	if Input.is_action_just_pressed("ui_accept") and atComputer and key1:
@@ -178,6 +221,9 @@ func _physics_process(_delta):
 		textBox.queue_text("Alex: \"Can you go investigate for me?.\"")
 		textBox.queue_text("Sparky: \"Not like I've got anything else to do.\"")
 		state = 7
+		
+	if Input.is_action_just_pressed("ui_accept") and atFinalConsole:
+		end_game()
 		
 	# Door locked text
 	if Input.is_action_just_pressed("ui_accept") && atDoor:
@@ -257,6 +303,15 @@ func wake_up():
 func respawn_text():
 	textBox.queue_text("Alex: \"Careful, spare parts don't grow on trees you know.\"")
 	
+func boss_kill():
+	state = 11
+	textBox.queue_text("Alex: \"You got him! Great fight!.\"")
+	textBox.queue_text("Alex: \"Now just hit the button on that console and I can cancel the lockdown.\"")
+	
+func end_game():
+	textBox.queue_text("GAME OVER")
+	state = 12
+	
 func introduction():
 	textBox.queue_text("[SYSTEM REBOOT IN PROGRESS...]")
 	textBox.queue_text("???: \"Welcome to Echo Station! My name is A.L.E.X.! How can I help you?\"")
@@ -278,6 +333,10 @@ func boss_introduction():
 	textBox.queue_text("???: \"Quiet, I'm in charge around here.\"")
 	textBox.queue_text("Sparky: \"Just listen to me, we can work together!\"")
 	textBox.queue_text("???: \"If you won't be quiet, I'll just have to shut you up myself!\"")
+	state = 9
+	
+func boss_retry():
+	textBox.queue_text("Kyle: \"Back for more I see!\"")
 	state = 9
 	
 func door_locked():
@@ -311,6 +370,10 @@ func pickup_Key3():
 	
 func spawn_boss():
 	print("spawn boss")
+	bossHealth.show()
+	var boss = load("res://src/Actors/Boss1.tscn").instance()
+	get_tree().get_root().get_node("Game").get_node("Level").add_child(boss)
+	boss.transform = bossSpawn.transform
 
 func get_direction(falling, paused):
 	var UpVector = 0
@@ -362,12 +425,20 @@ func take_damage(damage):
 		$RespawnTimer.start()
 		
 func respawn():
-	
+	PlayerStats.deaths += 1
 	transform = respawnPoint.transform
 	health = 3
 	hpBar.frame = 3
 	dead = false
 	respawn_text()
+	bossMusic.stop()
+	music1.play()
+	canTriggerBoss = true
+	if bossSpawned:
+		bossHealth.hide()
+		bossGate.get_node("CollisionShape2D").disabled = true
+		bossGate.hide()
+		get_tree().get_root().get_node("Game").get_node("Level").get_node("Boss1").queue_free()
 
 # This function calculates a new velocity whenever you need it.
 # It allows you to interrupt jumps.
@@ -451,6 +522,15 @@ func exit_computer():
 	interactIcon.hide()
 	atComputer = false
 	
+func enter_final():
+	interactIcon.show()
+	atFinalConsole = true
+
+func exit_final():
+	interactIcon.hide()
+	atFinalConsole = false
+	
+	
 func enter_door():
 	interactIcon.show()
 	atDoor = true
@@ -492,8 +572,11 @@ func _on_LeverDialog_body_entered(body):
 
 
 func _on_BossTrigger_body_entered(body):
-	bossTrigger.queue_free()
-	bossGate.get_node("CollisionShape2D").disabled = false
-	bossGate.show()
-	bossHealth.show()
-	boss_introduction()
+	if canTriggerBoss:
+		canTriggerBoss = false
+		bossGate.get_node("CollisionShape2D").disabled = false
+		bossGate.show()
+		if bossSpawned:
+			boss_retry()
+		else:
+			boss_introduction()

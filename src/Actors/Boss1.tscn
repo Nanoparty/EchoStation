@@ -286,6 +286,7 @@ z_index = 1
 texture = ExtResource( 4 )
 hframes = 13
 vframes = 2
+frame = 8
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/attack = SubResource( 9 )
@@ -343,4 +344,9 @@ frame = 1
 autoplay = "idle"
 anims/idle = SubResource( 10 )
 
+[node name="DeathTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
 [connection signal="timeout" from="AttackTimer" to="." method="_on_AttackTimer_timeout"]
+[connection signal="timeout" from="DeathTimer" to="." method="_on_DeathTimer_timeout"]

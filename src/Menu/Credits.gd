@@ -66,17 +66,11 @@ func _on_Timer_timeout():
 		return
 	if state == 7:		
 		state = 8
-		$Tween8.interpolate_property(song2, "modulate", Color(1,1,1,0), Color(1,1,1,1), 2.0, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-		$Tween8.start()
-		timer.start()
-		return
-	if state == 8:		
-		state = 9
 		$Tween9.interpolate_property(boss, "modulate", Color(1,1,1,0), Color(1,1,1,1), 2.0, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 		$Tween9.start()
 		timer.start()
 		return
-	if state == 9:
+	if state == 8:
 		continueButton.show()
 		continueButton.disabled = false
 		continueButton.grab_focus()

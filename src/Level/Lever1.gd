@@ -16,5 +16,5 @@ func _on_Lever1_body_entered(body):
 		body.destroy()
 		$Sprite.frame = 1
 		var node = get_tree()
-		node.get_root().get_children()[0].get_node("Level").get_node("Player").set_lever1()
-		print("tree: " , node.get_root().get_children()[0].get_node("Level").get_node("Player"))
+		node.get_root().get_node("Game").get_node("Level").get_node("Player").set_lever1()
+

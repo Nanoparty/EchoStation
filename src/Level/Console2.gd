@@ -4,7 +4,7 @@ extends Area2D
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-
+onready var canCollide = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -16,12 +16,19 @@ func _ready():
 #	pass
 
 
-func _on_Lever3_body_entered(body):
-	print("lever3 hit")
+func _on_Console2_body_entered(body):
+	if body is Boss1:
+		return
 	if body is Bullet:
-		print("Lever hit by bullet")
-		body.destroy()
-		$Sprite.frame = 1
-		var node = get_tree()
-		node.get_root().get_node("Game").get_node("Level").get_node("Player").set_lever3()
+		return
+	if canCollide:
+		body.enter_final()
 
+
+func _on_Console2_body_exited(body):
+	if body is Boss1:
+		return
+	if body is Bullet:
+		return
+	if canCollide:
+		body.exit_final()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=78 format=2]
+[gd_scene load_steps=80 format=2]
 
 [ext_resource path="res://src/Level/MainTiles.tres" type="TileSet" id=1]
 [ext_resource path="res://src/Actors/Drone1.tscn" type="PackedScene" id=2]
@@ -41,7 +41,7 @@
 [ext_resource path="res://assets/art/background/black.png" type="Texture" id=39]
 [ext_resource path="res://assets/art/environment/side_keys.png" type="Texture" id=40]
 [ext_resource path="res://src/Level/FadeOut.gd" type="Script" id=41]
-[ext_resource path="res://src/Actors/Boss1.tscn" type="PackedScene" id=42]
+[ext_resource path="res://src/Level/Console2.gd" type="Script" id=42]
 [ext_resource path="res://assets/art/enemy/bossgate.png" type="Texture" id=43]
 [ext_resource path="res://assets/fonts/new_dynamicfont.tres" type="DynamicFont" id=44]
 [ext_resource path="res://src/Level/BossHealth.gd" type="Script" id=45]
@@ -116,6 +116,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="RectangleShape2D" id=18]
+extents = Vector2( 8, 10 )
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 198.5, 119 )
@@ -282,15 +283,21 @@ bg_color = Color( 0.0431373, 0.0509804, 0.0666667, 1 )
 border_color = Color( 1, 1, 1, 1 )
 anti_aliasing = false
 
+[sub_resource type="DynamicFontData" id=36]
+font_path = "res://assets/fonts/Emulogic-zrEw.ttf"
+
+[sub_resource type="DynamicFont" id=37]
+size = 8
+font_data = SubResource( 36 )
+
 [node name="Level" type="Node2D"]
 pause_mode = 1
 script = ExtResource( 5 )
 
 [node name="Player" parent="." instance=ExtResource( 35 )]
-position = Vector2( 99, 761 )
+position = Vector2( 536, 320 )
 
 [node name="InterfaceLayer" parent="." instance=ExtResource( 36 )]
-visible = false
 
 [node name="PlayerSpawn" type="Node2D" parent="."]
 position = Vector2( -32, 568 )
@@ -1319,6 +1326,20 @@ frame = 1
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Interactibles/Console"]
 shape = SubResource( 18 )
 
+[node name="Console2" type="Area2D" parent="Interactibles"]
+position = Vector2( 16, 1048 )
+collision_layer = 3
+collision_mask = 3
+script = ExtResource( 42 )
+
+[node name="Sprite" type="Sprite" parent="Interactibles/Console2"]
+texture = ExtResource( 11 )
+hframes = 2
+frame = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactibles/Console2"]
+shape = SubResource( 18 )
+
 [node name="Computer" type="Sprite" parent="Interactibles"]
 position = Vector2( 16, 528 )
 texture = ExtResource( 6 )
@@ -2183,16 +2204,6 @@ texture = ExtResource( 23 )
 autoplay = "idle"
 anims/idle = SubResource( 15 )
 
-[node name="Key4" type="Area2D" parent="Keys"]
-position = Vector2( 64, 562 )
-script = ExtResource( 27 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Keys/Key4"]
-shape = SubResource( 14 )
-
-[node name="Sprite" type="Sprite" parent="Keys/Key4"]
-texture = ExtResource( 23 )
-
 [node name="Key2" type="Area2D" parent="Keys"]
 position = Vector2( 792, 200 )
 script = ExtResource( 28 )
@@ -2207,16 +2218,6 @@ texture = ExtResource( 25 )
 autoplay = "idle"
 anims/idle = SubResource( 16 )
 
-[node name="Key5" type="Area2D" parent="Keys"]
-position = Vector2( 91, 563 )
-script = ExtResource( 28 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Keys/Key5"]
-shape = SubResource( 14 )
-
-[node name="Sprite" type="Sprite" parent="Keys/Key5"]
-texture = ExtResource( 25 )
-
 [node name="Key3" type="Area2D" parent="Keys"]
 position = Vector2( -896, -392 )
 script = ExtResource( 29 )
@@ -2230,16 +2231,6 @@ texture = ExtResource( 24 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Keys/Key3"]
 autoplay = "idle"
 anims/idle = SubResource( 17 )
-
-[node name="Key6" type="Area2D" parent="Keys"]
-position = Vector2( 124, 563 )
-script = ExtResource( 29 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Keys/Key6"]
-shape = SubResource( 14 )
-
-[node name="Sprite" type="Sprite" parent="Keys/Key6"]
-texture = ExtResource( 24 )
 
 [node name="Levers" type="Node2D" parent="."]
 
@@ -2292,9 +2283,9 @@ script = ExtResource( 9 )
 
 [node name="BossMusic" type="AudioStreamPlayer2D" parent="Music"]
 stream = ExtResource( 38 )
+volume_db = 14.444
 
 [node name="FadeIn" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="Blackscreen" type="TextureRect" parent="FadeIn"]
 anchor_right = 1.0
@@ -2339,6 +2330,7 @@ shape = SubResource( 28 )
 position = Vector2( 16, 1064 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BossTrigger"]
+position = Vector2( 0, -7 )
 shape = SubResource( 29 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -2354,19 +2346,17 @@ anchor_bottom = 1.0
 [node name="FadeOut" type="CanvasLayer" parent="."]
 script = ExtResource( 41 )
 
-[node name="FadeOutBlack" type="ColorRect" parent="FadeOut"]
+[node name="Blackout" type="TextureRect" parent="FadeOut"]
 modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0, 0, 0, 1 )
+texture = ExtResource( 39 )
+expand = true
 
 [node name="FadeOutTween" type="Tween" parent="."]
 
 [node name="FadeOutTimer" type="Timer" parent="."]
 wait_time = 3.0
-
-[node name="Boss1" parent="." instance=ExtResource( 42 )]
-position = Vector2( 32, 1016 )
 
 [node name="BossGate" type="StaticBody2D" parent="."]
 position = Vector2( 16, 888 )
@@ -2399,7 +2389,7 @@ margin_left = 38.0
 margin_top = -4.0
 margin_right = 78.0
 margin_bottom = 10.0
-custom_fonts/font = ExtResource( 44 )
+custom_fonts/font = SubResource( 37 )
 text = "Kyle"
 align = 1
 
@@ -2407,8 +2397,13 @@ align = 1
 position = Vector2( 56, 14 )
 texture = ExtResource( 46 )
 
+[node name="BossSpawn" type="Node2D" parent="."]
+position = Vector2( 64, 947 )
+
 [connection signal="body_entered" from="Interactibles/Console" to="Interactibles/Console" method="_on_Console_body_entered"]
 [connection signal="body_exited" from="Interactibles/Console" to="Interactibles/Console" method="_on_Console_body_exited"]
+[connection signal="body_entered" from="Interactibles/Console2" to="Interactibles/Console2" method="_on_Console2_body_entered"]
+[connection signal="body_exited" from="Interactibles/Console2" to="Interactibles/Console2" method="_on_Console2_body_exited"]
 [connection signal="body_entered" from="Cameras/Room1/Area2D" to="Cameras/Room1" method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Cameras/Room1/Area2D" to="Cameras/Room1" method="_on_Area2D_body_exited"]
 [connection signal="body_entered" from="Cameras/Room2/Area2D" to="Cameras/Room2" method="_on_Area2D_body_entered"]
@@ -2468,11 +2463,8 @@ texture = ExtResource( 46 )
 [connection signal="body_entered" from="Upgrades/DoubleJump" to="Upgrades/DoubleJump" method="_on_DoubleJump_body_entered"]
 [connection signal="body_entered" from="Upgrades/Blaster" to="Upgrades/Blaster" method="_on_Blaster_body_entered"]
 [connection signal="body_entered" from="Keys/Key1" to="Keys/Key1" method="_on_Key1_body_entered"]
-[connection signal="body_entered" from="Keys/Key4" to="Keys/Key4" method="_on_Key1_body_entered"]
 [connection signal="body_entered" from="Keys/Key2" to="Keys/Key2" method="_on_Key2_body_entered"]
-[connection signal="body_entered" from="Keys/Key5" to="Keys/Key5" method="_on_Key2_body_entered"]
 [connection signal="body_entered" from="Keys/Key3" to="Keys/Key3" method="_on_Key3_body_entered"]
-[connection signal="body_entered" from="Keys/Key6" to="Keys/Key6" method="_on_Key3_body_entered"]
 [connection signal="body_entered" from="Levers/Lever1" to="Levers/Lever1" method="_on_Lever1_body_entered"]
 [connection signal="body_entered" from="Levers/Lever2" to="Levers/Lever2" method="_on_Lever2_body_entered"]
 [connection signal="body_entered" from="Levers/Lever3" to="Levers/Lever3" method="_on_Lever3_body_entered"]

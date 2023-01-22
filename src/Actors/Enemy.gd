@@ -46,6 +46,7 @@ func _physics_process(_delta):
 
 
 func destroy():
+	PlayerStats.enemies += 1
 	_state = State.DEAD
 	_velocity = Vector2.ZERO
 	

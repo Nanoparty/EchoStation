@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://assets/art/background/space.jpg" type="Texture" id=1]
 [ext_resource path="res://assets/art/background/title.png" type="Texture" id=2]
 [ext_resource path="res://assets/fonts/new_dynamicfont.tres" type="DynamicFont" id=3]
 [ext_resource path="res://src/Menu/focus.tres" type="StyleBox" id=4]
 [ext_resource path="res://src/Menu/Credits.gd" type="Script" id=5]
+[ext_resource path="res://assets/audio/music/space2.mp3" type="AudioStream" id=6]
 
 [sub_resource type="StyleBoxEmpty" id=6]
 
@@ -46,13 +47,13 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -220.0
+margin_left = -320.0
 margin_top = -326.0
-margin_right = 220.0
+margin_right = 320.0
 
 [node name="ProgrammingDesign" type="Label" parent="CanvasLayer/VBoxContainer"]
 modulate = Color( 1, 1, 1, 0 )
-margin_right = 440.0
+margin_right = 640.0
 margin_bottom = 26.0
 custom_fonts/font = ExtResource( 3 )
 text = "Programming & Design:"
@@ -60,7 +61,7 @@ text = "Programming & Design:"
 [node name="Nathan" type="Label" parent="CanvasLayer/VBoxContainer"]
 modulate = Color( 1, 1, 1, 0 )
 margin_top = 30.0
-margin_right = 440.0
+margin_right = 640.0
 margin_bottom = 56.0
 custom_fonts/font = ExtResource( 3 )
 text = "Nathan Foote"
@@ -69,7 +70,7 @@ align = 2
 [node name="Art" type="Label" parent="CanvasLayer/VBoxContainer"]
 modulate = Color( 1, 1, 1, 0 )
 margin_top = 60.0
-margin_right = 440.0
+margin_right = 640.0
 margin_bottom = 86.0
 custom_fonts/font = ExtResource( 3 )
 text = "Artwork:"
@@ -77,16 +78,16 @@ text = "Artwork:"
 [node name="ArtPack" type="Label" parent="CanvasLayer/VBoxContainer"]
 modulate = Color( 1, 1, 1, 0 )
 margin_top = 90.0
-margin_right = 440.0
+margin_right = 640.0
 margin_bottom = 116.0
 custom_fonts/font = ExtResource( 3 )
-text = "--------------"
+text = "Industrial Tileset by 0x72"
 align = 2
 
 [node name="Music" type="Label" parent="CanvasLayer/VBoxContainer"]
 modulate = Color( 1, 1, 1, 0 )
 margin_top = 120.0
-margin_right = 440.0
+margin_right = 640.0
 margin_bottom = 146.0
 custom_fonts/font = ExtResource( 3 )
 text = "Music:"
@@ -94,44 +95,35 @@ text = "Music:"
 [node name="MenuMusic" type="Label" parent="CanvasLayer/VBoxContainer"]
 modulate = Color( 1, 1, 1, 0 )
 margin_top = 150.0
-margin_right = 440.0
+margin_right = 640.0
 margin_bottom = 176.0
 custom_fonts/font = ExtResource( 3 )
-text = "------------------"
+text = "Space loop by flippytomtom"
 align = 2
 
 [node name="Song1" type="Label" parent="CanvasLayer/VBoxContainer"]
 modulate = Color( 1, 1, 1, 0 )
 margin_top = 180.0
-margin_right = 440.0
+margin_right = 640.0
 margin_bottom = 206.0
 custom_fonts/font = ExtResource( 3 )
-text = "---------------------"
-align = 2
-
-[node name="Song2" type="Label" parent="CanvasLayer/VBoxContainer"]
-modulate = Color( 1, 1, 1, 0 )
-margin_top = 210.0
-margin_right = 440.0
-margin_bottom = 236.0
-custom_fonts/font = ExtResource( 3 )
-text = "----------------------"
+text = "Floating Space by TsetsukenMusic"
 align = 2
 
 [node name="BossMusic" type="Label" parent="CanvasLayer/VBoxContainer"]
 modulate = Color( 1, 1, 1, 0 )
-margin_top = 240.0
-margin_right = 440.0
-margin_bottom = 266.0
+margin_top = 210.0
+margin_right = 640.0
+margin_bottom = 236.0
 custom_fonts/font = ExtResource( 3 )
-text = "---------------------"
+text = "Space Combat by DigohD"
 align = 2
 
 [node name="Continue" type="Button" parent="CanvasLayer/VBoxContainer"]
 modulate = Color( 1, 1, 1, 0 )
-margin_top = 270.0
-margin_right = 440.0
-margin_bottom = 296.0
+margin_top = 240.0
+margin_right = 640.0
+margin_bottom = 266.0
 custom_fonts/font = ExtResource( 3 )
 custom_styles/hover = SubResource( 6 )
 custom_styles/pressed = SubResource( 2 )
@@ -163,6 +155,10 @@ autostart = true
 [node name="Tween9" type="Tween" parent="."]
 
 [node name="Tween10" type="Tween" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+autoplay = true
 
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/Continue" to="." method="_on_Continue_pressed"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

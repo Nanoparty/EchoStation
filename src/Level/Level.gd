@@ -18,3 +18,8 @@ func _ready():
 			camera.limit_top = LIMIT_TOP
 			camera.limit_right = LIMIT_RIGHT
 			camera.limit_bottom = LIMIT_BOTTOM
+			
+func fade_out():
+	$FadeOutTween.interpolate_property($FadeOut/Blackout, "modulate", Color(0,0,0,0), Color(0,0,0,1), 2.0, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	$FadeOutTween.start()
+	$FadeOutTimer.start()
