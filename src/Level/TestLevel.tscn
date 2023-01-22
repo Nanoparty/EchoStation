@@ -267,7 +267,7 @@ void fragment(){
 [sub_resource type="ShaderMaterial" id=32]
 shader = SubResource( 31 )
 shader_param/color = Color( 0, 0, 0, 1 )
-shader_param/multiplier = -0.037
+shader_param/multiplier = 0.212
 shader_param/softness = 1.27
 
 [sub_resource type="RectangleShape2D" id=33]
@@ -2399,6 +2399,8 @@ texture = ExtResource( 46 )
 
 [node name="BossSpawn" type="Node2D" parent="."]
 position = Vector2( 64, 947 )
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
 
 [connection signal="body_entered" from="Interactibles/Console" to="Interactibles/Console" method="_on_Console_body_entered"]
 [connection signal="body_exited" from="Interactibles/Console" to="Interactibles/Console" method="_on_Console_body_exited"]
