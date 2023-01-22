@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://src/Menu/Options.gd" type="Script" id=1]
 
@@ -54,6 +54,13 @@ anti_aliasing = false
 
 [sub_resource type="StyleBoxEmpty" id=8]
 
+[sub_resource type="DynamicFontData" id=18]
+font_path = "res://assets/fonts/Emulogic-zrEw.ttf"
+
+[sub_resource type="DynamicFont" id=19]
+size = 34
+font_data = SubResource( 18 )
+
 [node name="Options" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -104,6 +111,18 @@ custom_styles/disabled = SubResource( 17 )
 custom_styles/normal = SubResource( 8 )
 text = "Apply"
 align = 0
+
+[node name="Label" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -238.0
+margin_top = -22.0
+margin_right = 238.0
+margin_bottom = 22.0
+custom_fonts/font = SubResource( 19 )
+text = "COMING SOON..."
 
 [connection signal="pressed" from="VBoxContainer/MusicButton" to="." method="_on_MusicButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/SoundsButton" to="." method="_on_SoundsButton_pressed"]
