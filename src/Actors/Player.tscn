@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=43 format=2]
 
 [ext_resource path="res://src/Actors/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/player/player_sprites.png" type="Texture" id=2]
@@ -21,6 +21,11 @@
 [ext_resource path="res://assets/art/environment/key1.png" type="Texture" id=19]
 [ext_resource path="res://assets/art/environment/key2.png" type="Texture" id=20]
 [ext_resource path="res://assets/art/player/F.png" type="Texture" id=21]
+[ext_resource path="res://assets/audio/sfx/door.wav" type="AudioStream" id=22]
+[ext_resource path="res://assets/audio/sfx/thud.wav" type="AudioStream" id=23]
+[ext_resource path="res://assets/audio/sfx/Heal.ogg" type="AudioStream" id=24]
+[ext_resource path="res://assets/audio/sfx/computer_upgrade.wav" type="AudioStream" id=25]
+[ext_resource path="res://assets/audio/sfx/computer_boot.wav" type="AudioStream" id=26]
 
 [sub_resource type="Animation" id=1]
 resource_name = "crouch"
@@ -479,6 +484,21 @@ one_shot = true
 
 [node name="ComputerTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="DoorOpen" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 22 )
+
+[node name="GroundThud" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 23 )
+
+[node name="Heal" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 24 )
+
+[node name="Computer_Start" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 26 )
+
+[node name="Computer_Upgrade" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 25 )
 
 [connection signal="timeout" from="PlatformTimer" to="." method="_on_PlatformTimer_timeout"]
 [connection signal="body_entered" from="DamageDetector" to="." method="_on_DamageDetector_body_entered"]

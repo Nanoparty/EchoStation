@@ -8,6 +8,8 @@ const LIMIT_BOTTOM = 690
 onready var bossHealth = $BossHealth
 
 func _ready():
+	if PlayerStats.sfx:
+		$Music/Music1.play()
 	bossHealth.hide()
 	$FadeInTween.interpolate_property($FadeIn/Blackscreen, "modulate", Color(0,0,0,1), Color(0,0,0,0), 2.0, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	$FadeInTween.start()

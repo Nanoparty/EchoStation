@@ -12,6 +12,7 @@ func _process(delta):
 		fadeout = true
 		$Tween2.interpolate_property($Blackscreen, "modulate", Color(0,0,0,0), Color(0,0,0,1), 2.0, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 		$Tween2.start()
+		$Transition.play()
 	
 func hide_menu():
 	print("hide menu")
@@ -27,6 +28,8 @@ func show_menu():
 	$VBoxContainer/StartButton.grab_focus()
 
 func _on_StartButton_pressed():
+	if PlayerStats.sfx:
+		$Confirm.play()
 	$Tween.interpolate_property($VBoxContainer/StartButton, "modulate", Color(1,1,1,1), Color(1,1,1,0), 2.0, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	$Tween.interpolate_property($VBoxContainer/OptionsButton, "modulate", Color(1,1,1,1), Color(1,1,1,0), 2.0, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	$Tween.interpolate_property($VBoxContainer/QuitButton, "modulate", Color(1,1,1,1), Color(1,1,1,0), 2.0, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
@@ -41,11 +44,15 @@ func _on_StartButton_pressed():
 
 
 func _on_OptionsButton_pressed():
+	if PlayerStats.sfx:
+		$Confirm.play()
 	hide_menu()
 	var options = load("res://src/Menu/Options.tscn").instance()
 	get_tree().current_scene.add_child(options)
 	
 func _on_QuitButton_pressed():
+	if PlayerStats.sfx:
+		$Confirm.play()
 	get_tree().quit()
 
 
@@ -59,4 +66,20 @@ func _on_Tween_tween_all_completed():
 
 
 func _on_Tween2_tween_all_completed():
+	
 	get_tree().change_scene("res://src/Main/Game.tscn")
+
+
+func _on_StartButton_focus_entered():
+	if PlayerStats.sfx:
+		$Selector.play()
+
+
+func _on_OptionsButton_focus_entered():
+	if PlayerStats.sfx:
+		$Selector.play()
+
+
+func _on_QuitButton_focus_entered():
+	if PlayerStats.sfx:
+		$Selector.play()

@@ -123,8 +123,12 @@ func take_damage():
 		destroy()
 
 func destroy():
+	$Hit.play()
 	_state = State.DEAD
 	_velocity = Vector2.ZERO
+	
+func PlayExplosion():
+	$Explode.play()
 	
 func spawn_laser_drone():
 	var drone1 = load("res://src/Actors/LaserDrone1.tscn").instance()

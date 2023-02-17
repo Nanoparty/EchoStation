@@ -84,6 +84,8 @@ onready var atFinalConsole = false
 
 onready var state = 0
 
+onready var grounded = false
+
 
 func _ready():
 	# Static types are necessary here to avoid warnings.
@@ -111,14 +113,17 @@ func _physics_process(_delta):
 			pass
 		#Opening first door
 		if state == 1:
+			if PlayerStats.sfx:
+				$DoorOpen.play()
 			door1.queue_free()
 			state = 2
-			
 			pass
 		if state == 2:
 			pass
 		if state == 3:
 			key1 = false
+			if PlayerStats.sfx:
+				$DoorOpen.play()
 			door2.queue_free()
 			state = 4
 			keyPanels.frame = 1
@@ -133,6 +138,8 @@ func _physics_process(_delta):
 		if state == 6:
 			pass
 		if state == 7:
+			if PlayerStats.sfx:
+				$DoorOpen.play()
 			door5.queue_free()
 			bossUnlocked = true
 			keyPanels.frame = 3
@@ -145,7 +152,8 @@ func _physics_process(_delta):
 			bossSpawned = true
 			music2.stop()
 			music1.stop()
-			bossMusic.play()
+			if PlayerStats.music:
+				bossMusic.play()
 			state = 10
 			pass
 		if state == 10:
@@ -163,6 +171,8 @@ func _physics_process(_delta):
 	
 	# Booting up Computer
 	if Input.is_action_just_pressed("ui_accept") && atComputer and state == 0:
+		if PlayerStats.sfx:
+			$Computer_Start.play()
 		computer.frame = 1
 		state = 1
 		atComputer = false
@@ -189,7 +199,10 @@ func _physics_process(_delta):
 		
 	#Talking to Alex with key1
 	if Input.is_action_just_pressed("ui_accept") and atComputer and key1:
+		if PlayerStats.sfx:
+			$Computer_Upgrade.play()
 		atComputer = false
+		computer.frame = 2
 		interactIcon.hide()
 		textBox.queue_text("Sparky: \"I think this is one of those security keys you wanted.\"")
 		textBox.queue_text("Alex: \"Yes, it is!. Great work!\"")
@@ -199,7 +212,10 @@ func _physics_process(_delta):
 		
 	#Talking to Alex with key2
 	if Input.is_action_just_pressed("ui_accept") and atComputer and key2:
+		if PlayerStats.sfx:
+			$Computer_Upgrade.play()
 		atComputer = false
+		computer.frame = 3
 		interactIcon.hide()
 		textBox.queue_text("Sparky: \"I found the second key!.\"")
 		textBox.queue_text("Alex: \"Excellent! We're almost done, just one more to go.\"")
@@ -208,7 +224,10 @@ func _physics_process(_delta):
 		
 	#Talking to Alex with key3
 	if Input.is_action_just_pressed("ui_accept") and atComputer and key3:
+		if PlayerStats.sfx:
+			$Computer_Upgrade.play()
 		atComputer = false
+		computer.frame = 4
 		interactIcon.hide()
 		textBox.queue_text("Sparky: \"I've got the last key!.\"")
 		textBox.queue_text("Alex: \"I knew you could do it. Now lets clean up this mess the humans left.\"")
@@ -229,6 +248,10 @@ func _physics_process(_delta):
 	if Input.is_action_just_pressed("ui_accept") && atDoor:
 		door_locked()
 		
+	if !grounded && is_on_floor():
+		grounded = true
+		$GroundThud.play()
+		
 	var falling = false
 	# Fall through platforms
 	if Input.is_action_pressed("crouch" + action_suffix) and Input.is_action_just_pressed("jump" + action_suffix) and is_on_floor():
@@ -237,7 +260,8 @@ func _physics_process(_delta):
 		get_node("PlatformTimer").start()
 	# Play jump sound
 	elif Input.is_action_just_pressed("jump" + action_suffix) and is_on_floor(): 
-		sound_jump.play()
+		if PlayerStats.sfx:
+			sound_jump.play()
 		
 	var direction = get_direction(falling, false)
 
@@ -387,7 +411,8 @@ func get_direction(falling, paused):
 	if jumpCount < 2 and !is_on_floor() and Input.is_action_just_pressed("jump" + action_suffix) and canDoubleJump:
 		UpVector = -1
 		jumpCount = 2
-		sound_jump.play()
+		if PlayerStats.sfx:
+			sound_jump.play()
 
 	elif jumpCount == 0 and is_on_floor() and !falling and Input.is_action_just_pressed("jump" + action_suffix):
 		UpVector = -1
@@ -418,15 +443,19 @@ func take_damage(damage):
 		hpBar.frame = 0
 	
 	if health > 0:
-		$Hit.play(0)
+		if PlayerStats.sfx:
+			$Hit.play(0)
 	else:
-		$Explode.play(0)
+		if PlayerStats.sfx:
+			$Explode.play(0)
 		set_animation("death")
 		dead = true
 		invulnerable = true
 		$RespawnTimer.start()
 		
 func respawn():
+	if PlayerStats.sfx:
+		$Heal.play()
 	PlayerStats.deaths += 1
 	transform = respawnPoint.transform
 	health = 3
@@ -434,7 +463,8 @@ func respawn():
 	dead = false
 	respawn_text()
 	bossMusic.stop()
-	music1.play()
+	if PlayerStats.music:
+		music1.play()
 	canTriggerBoss = true
 	if bossSpawned:
 		bossHealth.hide()
@@ -512,6 +542,8 @@ func set_lever3():
 func all_levers():
 	if lever1 and lever2 and lever3:
 		print("All levers active")
+		if PlayerStats.sfx:
+			$DoorOpen.play()
 		door3.queue_free()
 		door4.queue_free()
 		leverDialog.queue_free()

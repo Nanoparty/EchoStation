@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/Level/Key2.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/environment/key2.png" type="Texture" id=2]
+[ext_resource path="res://assets/audio/sfx/powerup.wav" type="AudioStream" id=3]
 
 [sub_resource type="RectangleShape2D" id=14]
 extents = Vector2( 8, 8 )
@@ -36,5 +37,8 @@ texture = ExtResource( 2 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "idle"
 anims/idle = SubResource( 16 )
+
+[node name="Pickup" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
 
 [connection signal="body_entered" from="." to="." method="_on_Key2_body_entered"]

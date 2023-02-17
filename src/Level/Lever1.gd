@@ -6,6 +6,7 @@ func _ready():
 	pass # Replace with function body.
 	
 func activate():
+	
 	$Sprite.frame = 1
 
 
@@ -17,4 +18,5 @@ func _on_Lever1_body_entered(body):
 		$Sprite.frame = 1
 		var node = get_tree()
 		node.get_root().get_node("Game").get_node("Level").get_node("Player").set_lever1()
+		node.get_root().get_node("Game").get_node("Level").get_node("Sounds").get_node("LeverlClick").play()
 

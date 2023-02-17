@@ -137,7 +137,7 @@ tracks/5/path = NodePath("Hit:playing")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
-tracks/5/enabled = true
+tracks/5/enabled = false
 tracks/5/keys = {
 "times": PoolRealArray( 0.00999999 ),
 "transitions": PoolRealArray( 1 ),
@@ -149,7 +149,7 @@ tracks/6/path = NodePath("Explode:playing")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/imported = false
-tracks/6/enabled = true
+tracks/6/enabled = false
 tracks/6/keys = {
 "times": PoolRealArray( 0.8 ),
 "transitions": PoolRealArray( 1 ),
@@ -163,9 +163,12 @@ tracks/7/loop_wrap = true
 tracks/7/imported = false
 tracks/7/enabled = true
 tracks/7/keys = {
-"times": PoolRealArray( 1.5 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0.8, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
 "values": [ {
+"args": [  ],
+"method": "PlayExplosion"
+}, {
 "args": [  ],
 "method": "queue_free"
 } ]
@@ -258,7 +261,7 @@ tracks/0/keys = {
 }
 
 [node name="Boss1" type="KinematicBody2D"]
-collision_layer = 2
+collision_layer = 0
 collision_mask = 24
 script = ExtResource( 5 )
 
@@ -281,12 +284,14 @@ cast_to = Vector2( 0, 35 )
 collision_mask = 24
 
 [node name="Sprite" type="Sprite" parent="."]
+self_modulate = Color( 1, 1, 1, 0.5 )
 material = SubResource( 1 )
+rotation = 3.14159
 z_index = 1
 texture = ExtResource( 4 )
 hframes = 13
 vframes = 2
-frame = 8
+frame = 11
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/attack = SubResource( 9 )

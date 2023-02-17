@@ -24,4 +24,4 @@ func _on_Lever3_body_entered(body):
 		$Sprite.frame = 1
 		var node = get_tree()
 		node.get_root().get_node("Game").get_node("Level").get_node("Player").set_lever3()
-
+		node.get_root().get_node("Game").get_node("Level").get_node("Sounds").get_node("LeverlClick").play()

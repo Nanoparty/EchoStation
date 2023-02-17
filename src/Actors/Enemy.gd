@@ -46,9 +46,15 @@ func _physics_process(_delta):
 
 
 func destroy():
+	if PlayerStats.sfx:
+		$Hit.play()
 	PlayerStats.enemies += 1
 	_state = State.DEAD
 	_velocity = Vector2.ZERO
+	
+func PlayExplosion():
+	if PlayerStats.sfx:
+		$Explode.play()
 	
 
 func get_new_animation():

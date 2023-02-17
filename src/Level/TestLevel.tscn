@@ -1,4 +1,4 @@
-[gd_scene load_steps=80 format=2]
+[gd_scene load_steps=82 format=2]
 
 [ext_resource path="res://src/Level/MainTiles.tres" type="TileSet" id=1]
 [ext_resource path="res://src/Actors/Drone1.tscn" type="PackedScene" id=2]
@@ -46,6 +46,8 @@
 [ext_resource path="res://assets/fonts/new_dynamicfont.tres" type="DynamicFont" id=44]
 [ext_resource path="res://src/Level/BossHealth.gd" type="Script" id=45]
 [ext_resource path="res://assets/art/enemy/hpbarTop.png" type="Texture" id=46]
+[ext_resource path="res://assets/audio/sfx/switch.wav" type="AudioStream" id=47]
+[ext_resource path="res://assets/audio/sfx/powerup.wav" type="AudioStream" id=48]
 
 [sub_resource type="Animation" id=8]
 resource_name = "New Anim"
@@ -295,9 +297,10 @@ pause_mode = 1
 script = ExtResource( 5 )
 
 [node name="Player" parent="." instance=ExtResource( 35 )]
-position = Vector2( 536, 320 )
+position = Vector2( 714.586, 298.237 )
 
 [node name="InterfaceLayer" parent="." instance=ExtResource( 36 )]
+visible = false
 
 [node name="PlayerSpawn" type="Node2D" parent="."]
 position = Vector2( -32, 568 )
@@ -2174,6 +2177,9 @@ texture = ExtResource( 12 )
 autoplay = "idle"
 anims/idle = SubResource( 11 )
 
+[node name="Pickup" type="AudioStreamPlayer2D" parent="Upgrades/DoubleJump"]
+stream = ExtResource( 48 )
+
 [node name="Blaster" type="Area2D" parent="Upgrades"]
 position = Vector2( -608, 200 )
 script = ExtResource( 22 )
@@ -2187,6 +2193,9 @@ texture = ExtResource( 21 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Upgrades/Blaster"]
 autoplay = "idle"
 anims/idle = SubResource( 13 )
+
+[node name="Pickup" type="AudioStreamPlayer2D" parent="Upgrades/Blaster"]
+stream = ExtResource( 48 )
 
 [node name="Keys" type="Node" parent="."]
 
@@ -2204,6 +2213,9 @@ texture = ExtResource( 23 )
 autoplay = "idle"
 anims/idle = SubResource( 15 )
 
+[node name="Pickup" type="AudioStreamPlayer2D" parent="Keys/Key1"]
+stream = ExtResource( 48 )
+
 [node name="Key2" type="Area2D" parent="Keys"]
 position = Vector2( 792, 200 )
 script = ExtResource( 28 )
@@ -2217,6 +2229,9 @@ texture = ExtResource( 25 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Keys/Key2"]
 autoplay = "idle"
 anims/idle = SubResource( 16 )
+
+[node name="Pickup" type="AudioStreamPlayer2D" parent="Keys/Key2"]
+stream = ExtResource( 48 )
 
 [node name="Key3" type="Area2D" parent="Keys"]
 position = Vector2( -896, -392 )
@@ -2232,6 +2247,9 @@ texture = ExtResource( 24 )
 autoplay = "idle"
 anims/idle = SubResource( 17 )
 
+[node name="Pickup" type="AudioStreamPlayer2D" parent="Keys/Key3"]
+stream = ExtResource( 48 )
+
 [node name="Levers" type="Node2D" parent="."]
 
 [node name="Lever1" type="Area2D" parent="Levers"]
@@ -2246,6 +2264,9 @@ position = Vector2( -536, -248 )
 texture = ExtResource( 30 )
 hframes = 2
 
+[node name="Switch" type="AudioStreamPlayer2D" parent="Levers/Lever1"]
+stream = ExtResource( 47 )
+
 [node name="Lever2" type="Area2D" parent="Levers"]
 script = ExtResource( 32 )
 
@@ -2257,6 +2278,9 @@ hframes = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Levers/Lever2"]
 position = Vector2( 520, -440 )
 shape = SubResource( 21 )
+
+[node name="Switch" type="AudioStreamPlayer2D" parent="Levers/Lever2"]
+stream = ExtResource( 47 )
 
 [node name="Lever3" type="Area2D" parent="Levers"]
 script = ExtResource( 33 )
@@ -2270,11 +2294,13 @@ position = Vector2( 168, -760 )
 texture = ExtResource( 30 )
 hframes = 2
 
+[node name="Switch" type="AudioStreamPlayer2D" parent="Levers/Lever3"]
+stream = ExtResource( 47 )
+
 [node name="Music" type="Node2D" parent="."]
 
 [node name="Music1" type="AudioStreamPlayer" parent="Music"]
 stream = ExtResource( 37 )
-autoplay = true
 script = ExtResource( 9 )
 
 [node name="Music2" type="AudioStreamPlayer" parent="Music"]
@@ -2285,7 +2311,13 @@ script = ExtResource( 9 )
 stream = ExtResource( 38 )
 volume_db = 14.444
 
+[node name="Sounds" type="Node2D" parent="."]
+
+[node name="LeverClick" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource( 47 )
+
 [node name="FadeIn" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="Blackscreen" type="TextureRect" parent="FadeIn"]
 anchor_right = 1.0
@@ -2344,6 +2376,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="FadeOut" type="CanvasLayer" parent="."]
+visible = false
 script = ExtResource( 41 )
 
 [node name="Blackout" type="TextureRect" parent="FadeOut"]

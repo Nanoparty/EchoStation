@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/transition.mp3-4310501bb3224da610a7d20e5258f565.mp3str"
+
+[deps]
+
+source_file="res://assets/audio/sfx/transition.mp3"
+dest_files=[ "res://.import/transition.mp3-4310501bb3224da610a7d20e5258f565.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

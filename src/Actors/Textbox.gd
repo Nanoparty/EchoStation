@@ -30,11 +30,14 @@ func _process(delta):
 			if !text_queue.empty():
 				pause = true
 				complete = false
+				if PlayerStats.sfx:
+					$Sound.play()
 				display_text()
 		State.READING:
 			if Input.is_action_just_pressed("ui_accept"):
 				label.percent_visible = 1.0
 				$Tween.stop_all()
+				$Sound.stop()
 				end_symbol.text = "v"
 				change_state(State.FINISHED)
 		State.FINISHED:
@@ -71,6 +74,7 @@ func display_text():
 func _on_Tween_tween_all_completed():
 	end_symbol.text = "v"
 	change_state(State.FINISHED)
+	$Sound.stop()
 
 func change_state(next_state):
 	current_state = next_state

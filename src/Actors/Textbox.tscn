@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/Actors/Textbox.gd" type="Script" id=1]
+[ext_resource path="res://assets/audio/sfx/text.ogg" type="AudioStream" id=2]
 
 [sub_resource type="StyleBoxFlat" id=15]
 bg_color = Color( 0, 0, 0, 1 )
@@ -75,5 +76,8 @@ custom_fonts/font = SubResource( 17 )
 text = "v"
 
 [node name="Tween" type="Tween" parent="."]
+
+[node name="Sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 2 )
 
 [connection signal="tween_all_completed" from="Tween" to="." method="_on_Tween_tween_all_completed"]

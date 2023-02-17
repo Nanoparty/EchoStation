@@ -13,6 +13,8 @@ onready var animation_player = $AnimationPlayer
 # Click the AnimationPlayer node to see the animation timeline.
 func _on_body_entered(_body):
 	animation_player.play("picked")
+	if PlayerStats.sfx:
+		$Pickup.play()
 	#var playerStats = get_node("/root/PlayerStats")
 	#player_vars.health -= 10
 	PlayerStats.coins += 1
