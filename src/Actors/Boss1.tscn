@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://assets/art/enemy/explosion.png" type="Texture" id=1]
 [ext_resource path="res://assets/audio/sfx/explode.wav" type="AudioStream" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://assets/art/enemy/boss.png" type="Texture" id=4]
 [ext_resource path="res://src/Actors/Boss1.gd" type="Script" id=5]
 [ext_resource path="res://assets/art/enemy/shield.png" type="Texture" id=6]
+[ext_resource path="res://assets/audio/sfx/laser_mp3.mp3" type="AudioStream" id=7]
 
 [sub_resource type="CanvasItemMaterial" id=1]
 
@@ -261,7 +262,7 @@ tracks/0/keys = {
 }
 
 [node name="Boss1" type="KinematicBody2D"]
-collision_layer = 0
+collision_layer = 2
 collision_mask = 24
 script = ExtResource( 5 )
 
@@ -284,14 +285,12 @@ cast_to = Vector2( 0, 35 )
 collision_mask = 24
 
 [node name="Sprite" type="Sprite" parent="."]
-self_modulate = Color( 1, 1, 1, 0.5 )
 material = SubResource( 1 )
-rotation = 3.14159
 z_index = 1
 texture = ExtResource( 4 )
 hframes = 13
 vframes = 2
-frame = 11
+frame = 8
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/attack = SubResource( 9 )
@@ -352,6 +351,10 @@ anims/idle = SubResource( 10 )
 [node name="DeathTimer" type="Timer" parent="."]
 wait_time = 3.0
 one_shot = true
+
+[node name="Laser" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 7 )
+volume_db = 10.0
 
 [connection signal="timeout" from="AttackTimer" to="." method="_on_AttackTimer_timeout"]
 [connection signal="timeout" from="DeathTimer" to="." method="_on_DeathTimer_timeout"]

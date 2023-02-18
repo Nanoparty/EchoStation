@@ -58,8 +58,8 @@ onready var canTriggerBoss = true
 onready var health = 3
 onready var dead = false
 onready var jumpCount = 0
-onready var canDoubleJump = false
-onready var canShoot = false
+onready var canDoubleJump = true
+onready var canShoot = true
 
 onready var canMove = true
 
@@ -252,6 +252,9 @@ func _physics_process(_delta):
 		grounded = true
 		$GroundThud.play()
 		
+	if !is_on_floor():
+		grounded = false;
+		
 	var falling = false
 	# Fall through platforms
 	if Input.is_action_pressed("crouch" + action_suffix) and Input.is_action_just_pressed("jump" + action_suffix) and is_on_floor():
@@ -369,26 +372,36 @@ func door_locked():
 	textBox.queue_text("This door is locked.")
 		
 func set_canDoubleJump():
+	if PlayerStats.sfx:
+		$Pickup.play()
 	canDoubleJump = true
 	textBox.queue_text("Look at this! My old maneuvering thrusters!")
 	textBox.queue_text("With these I should be able to get around a lot easier.")
 	
 func set_canShoot():
+	if PlayerStats.sfx:
+		$Pickup.play()
 	canShoot = true
 	textBox.queue_text("Hey! Its my old plasma cutter arm!")
 	textBox.queue_text("Now I should be able to defend myself against those rogue machines.")
 	
 func pickup_Key1():
+	if PlayerStats.sfx:
+		$Pickup.play()
 	key1 = true
 	textBox.queue_text("This looks like the first security key!")
 	textBox.queue_text("I better give this to A.L.E.X so she can unlock the station controls.")
 	
 func pickup_Key2():
+	if PlayerStats.sfx:
+		$Pickup.play()
 	key2 = true
 	textBox.queue_text("Nice, the second security key!")
 	textBox.queue_text("Just one more to go.")
 	
 func pickup_Key3():
+	if PlayerStats.sfx:
+		$Pickup.play()
 	key3 = true
 	textBox.queue_text("The last security key!")
 	textBox.queue_text("Now A.L.E.X should be able to fix the station.")
@@ -428,6 +441,7 @@ func get_direction(falling, paused):
 
 
 func take_damage(damage):
+	print("Take Damage")
 	if invulnerable:
 		 return
 	invulnerable = true
@@ -443,11 +457,11 @@ func take_damage(damage):
 		hpBar.frame = 0
 	
 	if health > 0:
-		if PlayerStats.sfx:
-			$Hit.play(0)
+		#if PlayerStats.sfx:
+		$Hit.play(0)
 	else:
-		if PlayerStats.sfx:
-			$Explode.play(0)
+		#if PlayerStats.sfx:
+		$Explode.play(0)
 		set_animation("death")
 		dead = true
 		invulnerable = true

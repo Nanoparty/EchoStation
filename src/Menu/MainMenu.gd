@@ -7,12 +7,16 @@ func _ready():
 	$VBoxContainer/StartButton.grab_focus()
 	
 func _process(delta):
+	
+		
+		
 	if textbox.complete and not fadeout:
 		print("complete")
 		fadeout = true
 		$Tween2.interpolate_property($Blackscreen, "modulate", Color(0,0,0,0), Color(0,0,0,1), 2.0, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 		$Tween2.start()
-		$Transition.play()
+		if PlayerStats.sfx:
+			$Transition.play()
 	
 func hide_menu():
 	print("hide menu")

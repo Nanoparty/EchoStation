@@ -22,6 +22,7 @@ func shoot(direction = 1):
 
 	bullet.set_as_toplevel(true)
 	add_child(bullet)
-	sound_shoot.play()
+	if PlayerStats.sfx:
+		sound_shoot.play()
 	timer.start()
 	return true
