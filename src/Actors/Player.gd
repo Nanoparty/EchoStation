@@ -58,8 +58,8 @@ onready var canTriggerBoss = true
 onready var health = 3
 onready var dead = false
 onready var jumpCount = 0
-onready var canDoubleJump = true
-onready var canShoot = true
+onready var canDoubleJump = false
+onready var canShoot = false
 
 onready var canMove = true
 
@@ -477,6 +477,8 @@ func take_damage(damage):
 		$RespawnTimer.start()
 		
 func respawn():
+	var r = deg2rad(180)
+	$Sprite.rotate(r)
 	if PlayerStats.sfx:
 		$Heal.play()
 	PlayerStats.deaths += 1

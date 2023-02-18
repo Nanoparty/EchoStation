@@ -1,4 +1,4 @@
-[gd_scene load_steps=82 format=2]
+[gd_scene load_steps=84 format=2]
 
 [ext_resource path="res://src/Level/MainTiles.tres" type="TileSet" id=1]
 [ext_resource path="res://src/Actors/Drone1.tscn" type="PackedScene" id=2]
@@ -48,6 +48,8 @@
 [ext_resource path="res://assets/art/enemy/hpbarTop.png" type="Texture" id=46]
 [ext_resource path="res://assets/audio/sfx/switch.wav" type="AudioStream" id=47]
 [ext_resource path="res://assets/audio/sfx/powerup.wav" type="AudioStream" id=48]
+[ext_resource path="res://assets/art/environment/light_circle.png" type="Texture" id=49]
+[ext_resource path="res://assets/art/environment/light.png" type="Texture" id=50]
 
 [sub_resource type="Animation" id=8]
 resource_name = "New Anim"
@@ -297,10 +299,9 @@ pause_mode = 1
 script = ExtResource( 5 )
 
 [node name="Player" parent="." instance=ExtResource( 35 )]
-position = Vector2( 100, 750 )
+position = Vector2( 500, 330 )
 
 [node name="InterfaceLayer" parent="." instance=ExtResource( 36 )]
-visible = false
 
 [node name="PlayerSpawn" type="Node2D" parent="."]
 position = Vector2( -32, 568 )
@@ -2435,6 +2436,589 @@ texture = ExtResource( 46 )
 position = Vector2( 64, 947 )
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color( 0.427451, 0.482353, 0.556863, 1 )
+
+[node name="Lights" type="Node2D" parent="."]
+
+[node name="Light2D" type="Light2D" parent="Lights"]
+position = Vector2( 328, 232 )
+texture = ExtResource( 49 )
+texture_scale = 2.0
+color = Color( 0.976471, 0.54902, 1, 1 )
+shadow_enabled = true
+
+[node name="Sprite" type="Sprite" parent="Lights/Light2D"]
+texture = ExtResource( 50 )
+
+[node name="Light2D3" type="Light2D" parent="Lights"]
+position = Vector2( 88, 200 )
+texture = ExtResource( 49 )
+texture_scale = 2.0
+color = Color( 0.976471, 0.54902, 1, 1 )
+shadow_enabled = true
+
+[node name="Sprite" type="Sprite" parent="Lights/Light2D3"]
+texture = ExtResource( 50 )
+
+[node name="Light2D4" type="Light2D" parent="Lights"]
+position = Vector2( -32, 200 )
+texture = ExtResource( 49 )
+texture_scale = 2.0
+color = Color( 0.976471, 0.54902, 1, 1 )
+shadow_enabled = true
+
+[node name="Sprite" type="Sprite" parent="Lights/Light2D4"]
+texture = ExtResource( 50 )
+
+[node name="Light2D5" type="Light2D" parent="Lights"]
+position = Vector2( -24, 440 )
+texture = ExtResource( 49 )
+texture_scale = 2.0
+color = Color( 0.976471, 0.54902, 1, 1 )
+shadow_enabled = true
+
+[node name="Sprite" type="Sprite" parent="Lights/Light2D5"]
+texture = ExtResource( 50 )
+
+[node name="Light2D7" type="Light2D" parent="Lights"]
+position = Vector2( -336, 448 )
+texture = ExtResource( 49 )
+texture_scale = 2.0
+color = Color( 0.976471, 0.54902, 1, 1 )
+shadow_enabled = true
+
+[node name="Sprite" type="Sprite" parent="Lights/Light2D7"]
+texture = ExtResource( 50 )
+
+[node name="Light2D8" type="Light2D" parent="Lights"]
+position = Vector2( -432, 448 )
+texture = ExtResource( 49 )
+texture_scale = 2.0
+color = Color( 0.976471, 0.54902, 1, 1 )
+shadow_enabled = true
+
+[node name="Sprite" type="Sprite" parent="Lights/Light2D8"]
+texture = ExtResource( 50 )
+
+[node name="Light2D9" type="Light2D" parent="Lights"]
+position = Vector2( -592, 544 )
+texture = ExtResource( 49 )
+texture_scale = 2.0
+color = Color( 0.976471, 0.54902, 1, 1 )
+shadow_enabled = true
+
+[node name="Sprite" type="Sprite" parent="Lights/Light2D9"]
+texture = ExtResource( 50 )
+
+[node name="Light2D10" type="Light2D" parent="Lights"]
+position = Vector2( -848, 544 )
+texture = ExtResource( 49 )
+texture_scale = 2.0
+color = Color( 0.976471, 0.54902, 1, 1 )
+shadow_enabled = true
+
+[node name="Sprite" type="Sprite" parent="Lights/Light2D10"]
+texture = ExtResource( 50 )
+
+[node name="Light2D11" type="Light2D" parent="Lights"]
+position = Vector2( -848, 448 )
+texture = ExtResource( 49 )
+texture_scale = 2.0
+color = Color( 0.976471, 0.54902, 1, 1 )
+shadow_enabled = true
+
+[node name="Sprite" type="Sprite" parent="Lights/Light2D11"]
+texture = ExtResource( 50 )
+
+[node name="Light2D12" type="Light2D" parent="Lights"]
+position = Vector2( -712, 448 )
+texture = ExtResource( 49 )
+texture_scale = 2.0
+color = Color( 0.976471, 0.54902, 1, 1 )
+shadow_enabled = true
+
+[node name="Sprite" type="Sprite" parent="Lights/Light2D12"]
+texture = ExtResource( 50 )
+
+[node name="Light2D13" type="Light2D" parent="Lights"]
+position = Vector2( -720, 336 )
+texture = ExtResource( 49 )
+texture_scale = 2.0
+color = Color( 0.976471, 0.54902, 1, 1 )
+shadow_enabled = true
+
+[node name="Sprite" type="Sprite" parent="Lights/Light2D13"]
+texture = ExtResource( 50 )
+
+[node name="Light2D14" type="Light2D" parent="Lights"]
+position = Vector2( -864, 336 )
+texture = ExtResource( 49 )
+texture_scale = 2.0
+color = Color( 0.976471, 0.54902, 1, 1 )
+shadow_enabled = true
+
+[node name="Sprite" type="Sprite" parent="Lights/Light2D14"]
+texture = ExtResource( 50 )
+
+[node name="Light2D15" type="Light2D" parent="Lights"]
+position = Vector2( -848, 184 )
+texture = ExtResource( 49 )
+texture_scale = 2.0
+color = Color( 0.976471, 0.54902, 1, 1 )
+shadow_enabled = true
+
+[node name="Sprite" type="Sprite" parent="Lights/Light2D15"]
+texture = ExtResource( 50 )
+
+[node name="Light2D16" type="Light2D" parent="Lights"]
+position = Vector2( -656, 192 )
+texture = ExtResource( 49 )
+texture_scale = 2.0
+color = Color( 0.976471, 0.54902, 1, 1 )
+shadow_enabled = true
+
+[node name="Sprite" type="Sprite" parent="Lights/Light2D16"]
+texture = ExtResource( 50 )
+
+[node name="Light2D17" type="Light2D" parent="Lights"]
+position = Vector2( -528, 184 )
+texture = ExtResource( 49 )
+texture_scale = 2.0
+color = Color( 0.976471, 0.54902, 1, 1 )
+shadow_enabled = true
+
+[node name="Sprite" type="Sprite" parent="Lights/Light2D17"]
+texture = ExtResource( 50 )
+
+[node name="Light2D18" type="Light2D" parent="Lights"]
+position = Vector2( -568, -48 )
+texture = ExtResource( 49 )
+texture_scale = 2.0
+color = Color( 0.976471, 0.54902, 1, 1 )
+shadow_enabled = true
+
+[node name="Sprite" type="Sprite" parent="Lights/Light2D18"]
+texture = ExtResource( 50 )
+
+[node name="Light2D51" type="Light2D" parent="Lights"]
+position = Vector2( -720, 48 )
+texture = ExtResource( 49 )
+texture_scale = 2.0
+color = Color( 0.976471, 0.54902, 1, 1 )
+shadow_enabled = true
+
+[node name="Sprite" type="Sprite" parent="Lights/Light2D51"]
+texture = ExtResource( 50 )
+
+[node name="Light2D52" type="Light2D" parent="Lights"]
+position = Vector2( -864, 32 )
+texture = ExtResource( 49 )
+texture_scale = 2.0
+color = Color( 0.976471, 0.54902, 1, 1 )
+shadow_enabled = true
+
+[node name="Sprite" type="Sprite" parent="Lights/Light2D52"]
+texture = ExtResource( 50 )
+
+[node name="Light2D53" type="Light2D" parent="Lights"]
+position = Vector2( -872, -96 )
+texture = ExtResource( 49 )
+texture_scale = 2.0
+color = Color( 0.976471, 0.54902, 1, 1 )
+shadow_enabled = true
+
+[node name="Sprite" type="Sprite" parent="Lights/Light2D53"]
+texture = ExtResource( 50 )
+
+[node name="Light2D54" type="Light2D" parent="Lights"]
+position = Vector2( -712, -192 )
+texture = ExtResource( 49 )
+texture_scale = 2.0
+color = Color( 0.976471, 0.54902, 1, 1 )
+shadow_enabled = true
+
+[node name="Sprite" type="Sprite" parent="Lights/Light2D54"]
+texture = ExtResource( 50 )
+
+[node name="Light2D55" type="Light2D" parent="Lights"]
+position = Vector2( -936, -240 )
+texture = ExtResource( 49 )
+texture_scale = 2.0
+color = Color( 0.976471, 0.54902, 1, 1 )
+shadow_enabled = true
+
+[node name="Sprite" type="Sprite" parent="Lights/Light2D55"]
+texture = ExtResource( 50 )
+
+[node name="Light2D56" type="Light2D" parent="Lights"]
+position = Vector2( -632, -240 )
+texture = ExtResource( 49 )
+texture_scale = 2.0
+color = Color( 0.976471, 0.54902, 1, 1 )
+shadow_enabled = true
+
+[node name="Sprite" type="Sprite" parent="Lights/Light2D56"]
+texture = ExtResource( 50 )
+
+[node name="Light2D57" type="Light2D" parent="Lights"]
+position = Vector2( -736, -408 )
+texture = ExtResource( 49 )
+texture_scale = 2.0
+color = Color( 0.976471, 0.54902, 1, 1 )
+shadow_enabled = true
+
+[node name="Sprite" type="Sprite" parent="Lights/Light2D57"]
+texture = ExtResource( 50 )
+
+[node name="Light2D58" type="Light2D" parent="Lights"]
+position = Vector2( -816, -408 )
+texture = ExtResource( 49 )
+texture_scale = 2.0
+color = Color( 0.976471, 0.54902, 1, 1 )
+shadow_enabled = true
+
+[node name="Sprite" type="Sprite" parent="Lights/Light2D58"]
+texture = ExtResource( 50 )
+
+[node name="Light2D19" type="Light2D" parent="Lights"]
+position = Vector2( -464, 48 )
+texture = ExtResource( 49 )
+texture_scale = 2.0
+color = Color( 0.976471, 0.54902, 1, 1 )
+shadow_enabled = true
+
+[node name="Sprite" type="Sprite" parent="Lights/Light2D19"]
+texture = ExtResource( 50 )
+
+[node name="Light2D20" type="Light2D" parent="Lights"]
+position = Vector2( -272, 48 )
+texture = ExtResource( 49 )
+texture_scale = 2.0
+color = Color( 0.976471, 0.54902, 1, 1 )
+shadow_enabled = true
+
+[node name="Sprite" type="Sprite" parent="Lights/Light2D20"]
+texture = ExtResource( 50 )
+
+[node name="Light2D21" type="Light2D" parent="Lights"]
+position = Vector2( -104, 32 )
+texture = ExtResource( 49 )
+texture_scale = 2.0
+color = Color( 0.976471, 0.54902, 1, 1 )
+shadow_enabled = true
+
+[node name="Sprite" type="Sprite" parent="Lights/Light2D21"]
+texture = ExtResource( 50 )
+
+[node name="Light2D22" type="Light2D" parent="Lights"]
+position = Vector2( 56, -24 )
+texture = ExtResource( 49 )
+texture_scale = 2.0
+color = Color( 0.976471, 0.54902, 1, 1 )
+shadow_enabled = true
+
+[node name="Sprite" type="Sprite" parent="Lights/Light2D22"]
+texture = ExtResource( 50 )
+
+[node name="Light2D23" type="Light2D" parent="Lights"]
+position = Vector2( -48, -120 )
+texture = ExtResource( 49 )
+texture_scale = 2.0
+color = Color( 0.976471, 0.54902, 1, 1 )
+shadow_enabled = true
+
+[node name="Sprite" type="Sprite" parent="Lights/Light2D23"]
+texture = ExtResource( 50 )
+
+[node name="Light2D24" type="Light2D" parent="Lights"]
+position = Vector2( -176, -176 )
+texture = ExtResource( 49 )
+texture_scale = 2.0
+color = Color( 0.976471, 0.54902, 1, 1 )
+shadow_enabled = true
+
+[node name="Sprite" type="Sprite" parent="Lights/Light2D24"]
+texture = ExtResource( 50 )
+
+[node name="Light2D25" type="Light2D" parent="Lights"]
+position = Vector2( -264, -264 )
+texture = ExtResource( 49 )
+texture_scale = 2.0
+color = Color( 0.976471, 0.54902, 1, 1 )
+shadow_enabled = true
+
+[node name="Sprite" type="Sprite" parent="Lights/Light2D25"]
+texture = ExtResource( 50 )
+
+[node name="Light2D26" type="Light2D" parent="Lights"]
+position = Vector2( -424, -272 )
+texture = ExtResource( 49 )
+texture_scale = 2.0
+color = Color( 0.976471, 0.54902, 1, 1 )
+shadow_enabled = true
+
+[node name="Sprite" type="Sprite" parent="Lights/Light2D26"]
+texture = ExtResource( 50 )
+
+[node name="Light2D27" type="Light2D" parent="Lights"]
+position = Vector2( -64, -320 )
+texture = ExtResource( 49 )
+texture_scale = 2.0
+color = Color( 0.976471, 0.54902, 1, 1 )
+shadow_enabled = true
+
+[node name="Sprite" type="Sprite" parent="Lights/Light2D27"]
+texture = ExtResource( 50 )
+
+[node name="Light2D28" type="Light2D" parent="Lights"]
+position = Vector2( 40, -152 )
+texture = ExtResource( 49 )
+texture_scale = 2.0
+color = Color( 0.976471, 0.54902, 1, 1 )
+shadow_enabled = true
+
+[node name="Sprite" type="Sprite" parent="Lights/Light2D28"]
+texture = ExtResource( 50 )
+
+[node name="Light2D29" type="Light2D" parent="Lights"]
+position = Vector2( 80, -384 )
+texture = ExtResource( 49 )
+texture_scale = 2.0
+color = Color( 0.976471, 0.54902, 1, 1 )
+shadow_enabled = true
+
+[node name="Sprite" type="Sprite" parent="Lights/Light2D29"]
+texture = ExtResource( 50 )
+
+[node name="Light2D30" type="Light2D" parent="Lights"]
+position = Vector2( -56, -392 )
+texture = ExtResource( 49 )
+texture_scale = 2.0
+color = Color( 0.976471, 0.54902, 1, 1 )
+shadow_enabled = true
+
+[node name="Sprite" type="Sprite" parent="Lights/Light2D30"]
+texture = ExtResource( 50 )
+
+[node name="Light2D31" type="Light2D" parent="Lights"]
+position = Vector2( 24, -560 )
+texture = ExtResource( 49 )
+texture_scale = 2.0
+color = Color( 0.976471, 0.54902, 1, 1 )
+shadow_enabled = true
+
+[node name="Sprite" type="Sprite" parent="Lights/Light2D31"]
+texture = ExtResource( 50 )
+
+[node name="Light2D32" type="Light2D" parent="Lights"]
+position = Vector2( 144, -672 )
+texture = ExtResource( 49 )
+texture_scale = 2.0
+color = Color( 0.976471, 0.54902, 1, 1 )
+shadow_enabled = true
+
+[node name="Sprite" type="Sprite" parent="Lights/Light2D32"]
+texture = ExtResource( 50 )
+
+[node name="Light2D33" type="Light2D" parent="Lights"]
+position = Vector2( -64, -744 )
+texture = ExtResource( 49 )
+texture_scale = 2.0
+color = Color( 0.976471, 0.54902, 1, 1 )
+shadow_enabled = true
+
+[node name="Sprite" type="Sprite" parent="Lights/Light2D33"]
+texture = ExtResource( 50 )
+
+[node name="Light2D34" type="Light2D" parent="Lights"]
+position = Vector2( 200, -528 )
+texture = ExtResource( 49 )
+texture_scale = 2.0
+color = Color( 0.976471, 0.54902, 1, 1 )
+shadow_enabled = true
+
+[node name="Sprite" type="Sprite" parent="Lights/Light2D34"]
+texture = ExtResource( 50 )
+
+[node name="Light2D35" type="Light2D" parent="Lights"]
+position = Vector2( 248, -448 )
+texture = ExtResource( 49 )
+texture_scale = 2.0
+color = Color( 0.976471, 0.54902, 1, 1 )
+shadow_enabled = true
+
+[node name="Sprite" type="Sprite" parent="Lights/Light2D35"]
+texture = ExtResource( 50 )
+
+[node name="Light2D36" type="Light2D" parent="Lights"]
+position = Vector2( 568, -472 )
+texture = ExtResource( 49 )
+texture_scale = 2.0
+color = Color( 0.976471, 0.54902, 1, 1 )
+shadow_enabled = true
+
+[node name="Sprite" type="Sprite" parent="Lights/Light2D36"]
+texture = ExtResource( 50 )
+
+[node name="Light2D6" type="Light2D" parent="Lights"]
+position = Vector2( 136, 448 )
+texture = ExtResource( 49 )
+texture_scale = 2.0
+color = Color( 0.976471, 0.54902, 1, 1 )
+shadow_enabled = true
+
+[node name="Sprite" type="Sprite" parent="Lights/Light2D6"]
+texture = ExtResource( 50 )
+
+[node name="Light2D2" type="Light2D" parent="Lights"]
+position = Vector2( 528, 232 )
+texture = ExtResource( 49 )
+texture_scale = 2.0
+color = Color( 0.976471, 0.54902, 1, 1 )
+shadow_enabled = true
+
+[node name="Sprite" type="Sprite" parent="Lights/Light2D2"]
+texture = ExtResource( 50 )
+
+[node name="Light2D37" type="Light2D" parent="Lights"]
+position = Vector2( 720, 288 )
+texture = ExtResource( 49 )
+texture_scale = 2.0
+color = Color( 0.976471, 0.54902, 1, 1 )
+shadow_enabled = true
+
+[node name="Sprite" type="Sprite" parent="Lights/Light2D37"]
+texture = ExtResource( 50 )
+
+[node name="Light2D38" type="Light2D" parent="Lights"]
+position = Vector2( 912, 288 )
+texture = ExtResource( 49 )
+texture_scale = 2.0
+color = Color( 0.976471, 0.54902, 1, 1 )
+shadow_enabled = true
+
+[node name="Sprite" type="Sprite" parent="Lights/Light2D38"]
+texture = ExtResource( 50 )
+
+[node name="Light2D39" type="Light2D" parent="Lights"]
+position = Vector2( 816, 432 )
+texture = ExtResource( 49 )
+texture_scale = 2.0
+color = Color( 0.976471, 0.54902, 1, 1 )
+shadow_enabled = true
+
+[node name="Sprite" type="Sprite" parent="Lights/Light2D39"]
+texture = ExtResource( 50 )
+
+[node name="Light2D40" type="Light2D" parent="Lights"]
+position = Vector2( 680, 528 )
+texture = ExtResource( 49 )
+texture_scale = 2.0
+color = Color( 0.976471, 0.54902, 1, 1 )
+shadow_enabled = true
+
+[node name="Sprite" type="Sprite" parent="Lights/Light2D40"]
+texture = ExtResource( 50 )
+
+[node name="Light2D41" type="Light2D" parent="Lights"]
+position = Vector2( 488, 552 )
+texture = ExtResource( 49 )
+texture_scale = 2.0
+color = Color( 0.976471, 0.54902, 1, 1 )
+shadow_enabled = true
+
+[node name="Sprite" type="Sprite" parent="Lights/Light2D41"]
+texture = ExtResource( 50 )
+
+[node name="Light2D42" type="Light2D" parent="Lights"]
+position = Vector2( 296, 528 )
+texture = ExtResource( 49 )
+texture_scale = 2.0
+color = Color( 0.976471, 0.54902, 1, 1 )
+shadow_enabled = true
+
+[node name="Sprite" type="Sprite" parent="Lights/Light2D42"]
+texture = ExtResource( 50 )
+
+[node name="Light2D45" type="Light2D" parent="Lights"]
+position = Vector2( 416, 640 )
+texture = ExtResource( 49 )
+texture_scale = 2.0
+color = Color( 0.976471, 0.54902, 1, 1 )
+shadow_enabled = true
+
+[node name="Sprite" type="Sprite" parent="Lights/Light2D45"]
+texture = ExtResource( 50 )
+
+[node name="Light2D46" type="Light2D" parent="Lights"]
+position = Vector2( 168, 704 )
+texture = ExtResource( 49 )
+texture_scale = 2.0
+color = Color( 0.976471, 0.54902, 1, 1 )
+shadow_enabled = true
+
+[node name="Sprite" type="Sprite" parent="Lights/Light2D46"]
+texture = ExtResource( 50 )
+
+[node name="Light2D47" type="Light2D" parent="Lights"]
+position = Vector2( 80, 792 )
+texture = ExtResource( 49 )
+texture_scale = 2.0
+color = Color( 0.976471, 0.54902, 1, 1 )
+shadow_enabled = true
+
+[node name="Sprite" type="Sprite" parent="Lights/Light2D47"]
+texture = ExtResource( 50 )
+
+[node name="Light2D48" type="Light2D" parent="Lights"]
+position = Vector2( -56, 792 )
+texture = ExtResource( 49 )
+texture_scale = 2.0
+color = Color( 0.976471, 0.54902, 1, 1 )
+shadow_enabled = true
+
+[node name="Sprite" type="Sprite" parent="Lights/Light2D48"]
+texture = ExtResource( 50 )
+
+[node name="Light2D49" type="Light2D" parent="Lights"]
+position = Vector2( -48, 936 )
+texture = ExtResource( 49 )
+texture_scale = 2.0
+color = Color( 0.976471, 0.54902, 1, 1 )
+shadow_enabled = true
+
+[node name="Sprite" type="Sprite" parent="Lights/Light2D49"]
+texture = ExtResource( 50 )
+
+[node name="Light2D50" type="Light2D" parent="Lights"]
+position = Vector2( 96, 944 )
+texture = ExtResource( 49 )
+texture_scale = 2.0
+color = Color( 0.976471, 0.54902, 1, 1 )
+shadow_enabled = true
+
+[node name="Sprite" type="Sprite" parent="Lights/Light2D50"]
+texture = ExtResource( 50 )
+
+[node name="Light2D43" type="Light2D" parent="Lights"]
+position = Vector2( 360, 432 )
+texture = ExtResource( 49 )
+texture_scale = 2.0
+color = Color( 0.976471, 0.54902, 1, 1 )
+shadow_enabled = true
+
+[node name="Sprite" type="Sprite" parent="Lights/Light2D43"]
+texture = ExtResource( 50 )
+
+[node name="Light2D44" type="Light2D" parent="Lights"]
+position = Vector2( 480, 432 )
+texture = ExtResource( 49 )
+texture_scale = 2.0
+color = Color( 0.976471, 0.54902, 1, 1 )
+shadow_enabled = true
+
+[node name="Sprite" type="Sprite" parent="Lights/Light2D44"]
+texture = ExtResource( 50 )
 
 [connection signal="body_entered" from="Interactibles/Console" to="Interactibles/Console" method="_on_Console_body_entered"]
 [connection signal="body_exited" from="Interactibles/Console" to="Interactibles/Console" method="_on_Console_body_exited"]

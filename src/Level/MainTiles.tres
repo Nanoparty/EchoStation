@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=43 format=2]
+[gd_resource type="TileSet" load_steps=45 format=2]
 
 [ext_resource path="res://assets/art/tileset/industrial.png" type="Texture" id=1]
 
@@ -28,6 +28,9 @@ polygon = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 
 [sub_resource type="ConvexPolygonShape2D" id=8]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+
+[sub_resource type="OccluderPolygon2D" id=45]
+polygon = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 
 [sub_resource type="ConvexPolygonShape2D" id=10]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
@@ -88,6 +91,9 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 
 [sub_resource type="ConvexPolygonShape2D" id=22]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+
+[sub_resource type="OccluderPolygon2D" id=46]
+polygon = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 
 [sub_resource type="ConvexPolygonShape2D" id=23]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
@@ -611,6 +617,7 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 31/region = Rect2( 16, 112, 16, 16 )
 31/tile_mode = 0
 31/occluder_offset = Vector2( 0, 0 )
+31/occluder = SubResource( 45 )
 31/navigation_offset = Vector2( 0, 0 )
 31/shape_offset = Vector2( 0, 0 )
 31/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
@@ -1093,7 +1100,7 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 55/autotile/icon_coordinate = Vector2( 0, 0 )
 55/autotile/tile_size = Vector2( 16, 16 )
 55/autotile/spacing = 0
-55/autotile/occluder_map = [  ]
+55/autotile/occluder_map = [ Vector2( 0, 0 ), SubResource( 46 ) ]
 55/autotile/navpoly_map = [  ]
 55/autotile/priority_map = [  ]
 55/autotile/z_index_map = [  ]
