@@ -125,13 +125,15 @@ func take_damage():
 
 func destroy():
 	despawn_laser()
-	$Hit.play()
+	if PlayerStats.sfx:
+		$Hit.play()
 	_velocity.x = 0
 	_state = State.DEAD
 	_velocity = Vector2.ZERO
 	
 func PlayExplosion():
-	$Explode.play()
+	if PlayerStats.sfx:
+		$Explode.play()
 	
 func spawn_laser_drone():
 	var drone1 = load("res://src/Actors/LaserDrone1.tscn").instance()
@@ -166,8 +168,8 @@ func _on_AttackTimer_timeout():
 func start_attack():
 	print("attack")
 	spawn_laser()
-
-	$Laser.play()
+	if PlayerStats.sfx:
+		$Laser.play()
 	_state = State.ATTACK
 	
 	

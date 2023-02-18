@@ -250,7 +250,8 @@ func _physics_process(_delta):
 		
 	if !grounded && is_on_floor():
 		grounded = true
-		$GroundThud.play()
+		if PlayerStats.sfx:
+			$GroundThud.play()
 		
 	if !is_on_floor():
 		grounded = false;
