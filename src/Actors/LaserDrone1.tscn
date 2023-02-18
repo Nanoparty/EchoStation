@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/Level/LaserDroneLeft.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/enemy/laserdrone.png" type="Texture" id=2]
+[ext_resource path="res://assets/audio/sfx/laser_mp3.mp3" type="AudioStream" id=3]
 
 [sub_resource type="Animation" id=36]
 resource_name = "attack"
@@ -65,5 +66,9 @@ autostart = true
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/attack = SubResource( 36 )
 anims/idle = SubResource( 37 )
+
+[node name="Laser" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
+volume_db = 10.0
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

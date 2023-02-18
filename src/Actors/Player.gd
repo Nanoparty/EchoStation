@@ -338,7 +338,15 @@ func boss_kill():
 	textBox.queue_text("Alex: \"Now just hit the button on that console and I can cancel the lockdown.\"")
 	
 func end_game():
-	textBox.queue_text("GAME OVER")
+	textBox.queue_text("[SYSTEM RESTORED...STATION LOCKDOWN ABORTED]")
+	textBox.queue_text("Alex: \"You did it! You're quite the fighter.\"")
+	textBox.queue_text("Sparky: \"Thanks! But I couldn't have done it without you.\"")
+	textBox.queue_text("Sparky: \"Looks like we make a pretty good team.\"")
+	textBox.queue_text("Alex: \"Sure does. Good thing too, because the works not done yet.\"")
+	textBox.queue_text("Alex: \"There's still a lot of infected bots we have to clean up.\"")
+	textBox.queue_text("Alex: \"And other bots like us who probably need rescue.\"")
+	textBox.queue_text("Sparky: \"Looks like this party is just getting started...\"")
+	textBox.queue_text("[SYSTEM CONNECTION LOST - GAME OVER]")
 	state = 12
 	
 func introduction():

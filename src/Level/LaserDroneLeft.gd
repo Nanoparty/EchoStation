@@ -20,11 +20,14 @@ func spawn_next():
 	get_tree().get_root().get_node("Game").get_node("Level").add_child(drone2)
 
 func end_laser():
+	$Laser.stop()
 	get_node("LaserBeam").queue_free()
 	spawn_next()
 	queue_free()
 	
 func spawn_laser():
+	if PlayerStats.sfx:
+		$Laser.play()
 	var laser = load("res://src/Actors/LaserBeam.tscn").instance()
 	add_child(laser)
 

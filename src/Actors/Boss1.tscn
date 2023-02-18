@@ -335,7 +335,7 @@ stream = ExtResource( 3 )
 stream = ExtResource( 2 )
 
 [node name="AttackTimer" type="Timer" parent="."]
-wait_time = 3.0
+wait_time = 4.0
 one_shot = true
 
 [node name="Shield" type="Sprite" parent="."]

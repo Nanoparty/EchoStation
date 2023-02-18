@@ -79,4 +79,7 @@ func _on_Timer_timeout():
 
 
 func _on_Continue_pressed():
-	get_tree().change_scene("res://src/Menu/MainMenu.tscn")
+	get_tree().get_root().get_node("Credits").queue_free()
+	var menu = load("res://src/Menu/MainMenu.tscn").instance()
+	get_tree().get_root().add_child(menu)
+	
