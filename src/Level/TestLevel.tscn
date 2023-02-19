@@ -123,10 +123,10 @@ tracks/0/keys = {
 extents = Vector2( 8, 10 )
 
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 198.5, 119 )
+extents = Vector2( 189.5, 119 )
 
 [sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 200, 120 )
+extents = Vector2( 193, 112.188 )
 
 [sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 8, 4 )
@@ -302,6 +302,7 @@ script = ExtResource( 5 )
 position = Vector2( 500, 330 )
 
 [node name="InterfaceLayer" parent="." instance=ExtResource( 36 )]
+visible = false
 
 [node name="PlayerSpawn" type="Node2D" parent="."]
 position = Vector2( -32, 568 )
@@ -1363,10 +1364,9 @@ zoom = Vector2( 0.5, 0.5 )
 script = ExtResource( 7 )
 
 [node name="Area2D" type="Area2D" parent="Cameras/Room1"]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Cameras/Room1/Area2D"]
-position = Vector2( -0.5, 0 )
+position = Vector2( 1.5, 0 )
 shape = SubResource( 4 )
 
 [node name="Room2" type="Camera2D" parent="Cameras"]
@@ -1375,9 +1375,9 @@ zoom = Vector2( 0.5, 0.5 )
 script = ExtResource( 7 )
 
 [node name="Area2D" type="Area2D" parent="Cameras/Room2"]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Cameras/Room2/Area2D"]
+position = Vector2( -7, -1.75 )
 shape = SubResource( 5 )
 
 [node name="Room3" type="Camera2D" parent="Cameras"]
@@ -1386,9 +1386,9 @@ zoom = Vector2( 0.5, 0.5 )
 script = ExtResource( 7 )
 
 [node name="Area2D" type="Area2D" parent="Cameras/Room3"]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Cameras/Room3/Area2D"]
+position = Vector2( 0, 3.5 )
 shape = SubResource( 5 )
 
 [node name="Room4" type="Camera2D" parent="Cameras"]
@@ -1397,7 +1397,6 @@ zoom = Vector2( 0.5, 0.5 )
 script = ExtResource( 7 )
 
 [node name="Area2D" type="Area2D" parent="Cameras/Room4"]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Cameras/Room4/Area2D"]
 shape = SubResource( 5 )
@@ -1408,7 +1407,6 @@ zoom = Vector2( 0.5, 0.5 )
 script = ExtResource( 7 )
 
 [node name="Area2D" type="Area2D" parent="Cameras/Room5"]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Cameras/Room5/Area2D"]
 shape = SubResource( 5 )
@@ -1419,7 +1417,6 @@ zoom = Vector2( 0.5, 0.5 )
 script = ExtResource( 7 )
 
 [node name="Area2D" type="Area2D" parent="Cameras/Room6"]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Cameras/Room6/Area2D"]
 shape = SubResource( 5 )
@@ -1430,7 +1427,6 @@ zoom = Vector2( 0.5, 0.5 )
 script = ExtResource( 7 )
 
 [node name="Area2D" type="Area2D" parent="Cameras/Room7"]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Cameras/Room7/Area2D"]
 shape = SubResource( 5 )
@@ -1441,7 +1437,6 @@ zoom = Vector2( 0.5, 0.5 )
 script = ExtResource( 7 )
 
 [node name="Area2D" type="Area2D" parent="Cameras/Room14"]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Cameras/Room14/Area2D"]
 shape = SubResource( 5 )
@@ -1452,7 +1447,6 @@ zoom = Vector2( 0.5, 0.5 )
 script = ExtResource( 7 )
 
 [node name="Area2D" type="Area2D" parent="Cameras/Room15"]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Cameras/Room15/Area2D"]
 shape = SubResource( 5 )
@@ -1463,7 +1457,6 @@ zoom = Vector2( 0.5, 0.5 )
 script = ExtResource( 7 )
 
 [node name="Area2D" type="Area2D" parent="Cameras/Room16"]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Cameras/Room16/Area2D"]
 shape = SubResource( 5 )
@@ -1474,7 +1467,6 @@ zoom = Vector2( 0.5, 0.5 )
 script = ExtResource( 7 )
 
 [node name="Area2D" type="Area2D" parent="Cameras/Room20"]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Cameras/Room20/Area2D"]
 shape = SubResource( 5 )
@@ -1485,7 +1477,6 @@ zoom = Vector2( 0.5, 0.5 )
 script = ExtResource( 7 )
 
 [node name="Area2D" type="Area2D" parent="Cameras/Room21"]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Cameras/Room21/Area2D"]
 shape = SubResource( 5 )
@@ -1496,7 +1487,6 @@ zoom = Vector2( 0.5, 0.5 )
 script = ExtResource( 7 )
 
 [node name="Area2D" type="Area2D" parent="Cameras/Room22"]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Cameras/Room22/Area2D"]
 shape = SubResource( 5 )
@@ -1507,7 +1497,6 @@ zoom = Vector2( 0.5, 0.5 )
 script = ExtResource( 7 )
 
 [node name="Area2D" type="Area2D" parent="Cameras/Room17"]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Cameras/Room17/Area2D"]
 shape = SubResource( 5 )
@@ -1518,7 +1507,6 @@ zoom = Vector2( 0.5, 0.5 )
 script = ExtResource( 7 )
 
 [node name="Area2D" type="Area2D" parent="Cameras/Room18"]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Cameras/Room18/Area2D"]
 shape = SubResource( 5 )
@@ -1529,9 +1517,9 @@ zoom = Vector2( 0.5, 0.5 )
 script = ExtResource( 7 )
 
 [node name="Area2D" type="Area2D" parent="Cameras/Room19"]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Cameras/Room19/Area2D"]
+position = Vector2( 0, -1.1875 )
 shape = SubResource( 5 )
 
 [node name="Room23" type="Camera2D" parent="Cameras"]
@@ -1540,9 +1528,9 @@ zoom = Vector2( 0.5, 0.5 )
 script = ExtResource( 7 )
 
 [node name="Area2D" type="Area2D" parent="Cameras/Room23"]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Cameras/Room23/Area2D"]
+position = Vector2( 0, -1.375 )
 shape = SubResource( 5 )
 
 [node name="Room8" type="Camera2D" parent="Cameras"]
@@ -1551,7 +1539,6 @@ zoom = Vector2( 0.5, 0.5 )
 script = ExtResource( 7 )
 
 [node name="Area2D" type="Area2D" parent="Cameras/Room8"]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Cameras/Room8/Area2D"]
 shape = SubResource( 5 )
@@ -1562,7 +1549,6 @@ zoom = Vector2( 0.5, 0.5 )
 script = ExtResource( 7 )
 
 [node name="Area2D" type="Area2D" parent="Cameras/Room9"]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Cameras/Room9/Area2D"]
 shape = SubResource( 5 )
@@ -1573,7 +1559,6 @@ zoom = Vector2( 0.5, 0.5 )
 script = ExtResource( 7 )
 
 [node name="Area2D" type="Area2D" parent="Cameras/Room10"]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Cameras/Room10/Area2D"]
 shape = SubResource( 5 )
@@ -1584,7 +1569,6 @@ zoom = Vector2( 0.5, 0.5 )
 script = ExtResource( 7 )
 
 [node name="Area2D" type="Area2D" parent="Cameras/Room11"]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Cameras/Room11/Area2D"]
 shape = SubResource( 5 )
@@ -1595,7 +1579,6 @@ zoom = Vector2( 0.5, 0.5 )
 script = ExtResource( 7 )
 
 [node name="Area2D" type="Area2D" parent="Cameras/Room12"]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Cameras/Room12/Area2D"]
 shape = SubResource( 5 )
@@ -1606,7 +1589,6 @@ zoom = Vector2( 0.5, 0.5 )
 script = ExtResource( 7 )
 
 [node name="Area2D" type="Area2D" parent="Cameras/Room13"]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Cameras/Room13/Area2D"]
 shape = SubResource( 5 )
@@ -2321,6 +2303,7 @@ volume_db = 14.444
 stream = ExtResource( 47 )
 
 [node name="FadeIn" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="Blackscreen" type="TextureRect" parent="FadeIn"]
 anchor_right = 1.0
