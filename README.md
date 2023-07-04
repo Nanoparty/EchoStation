@@ -19,7 +19,7 @@ Game is available to download and play for free on Windows, Mac, and Linux at ht
 
 Jump, slash, and navigate your way through challenging platforming levels with a variety of different obstacles and mechanics!
 
-### Exploration
+### Exploration and Narrative
 
 Explore the abandoned space station and unlock new abilities in this mini Metroidvania! Uncover the story behind the mysterious station!
 
