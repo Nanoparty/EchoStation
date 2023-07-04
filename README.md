@@ -1,4 +1,7 @@
 # EchoStation
+
+![version](https://img.shields.io/badge/Version-2.0-green)
+
 A 2D platformer about a robot who wakes up alone on an abandoned space station. Made in Godot 3 for Godot Wild Jam 52. My first game made in Godot.
 
 ## Play Now
