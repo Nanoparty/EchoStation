@@ -571,7 +571,8 @@ func all_levers():
 			$DoorOpen.play()
 		door3.queue_free()
 		door4.queue_free()
-		leverDialog.queue_free()
+		if leverDialog:
+			leverDialog.queue_free()
 
 func enter_computer():
 	interactIcon.show()

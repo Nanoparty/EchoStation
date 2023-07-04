@@ -7,6 +7,8 @@ extends Area2D
 
 func _on_Console_body_entered(body):
 	print("console collision")
+	if body is Bullet:
+		return
 	body.enter_computer()
 
 
