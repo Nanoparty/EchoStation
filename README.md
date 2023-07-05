@@ -28,3 +28,5 @@ Explore the abandoned space station and unlock new abilities in this mini Metroi
 This project uses the following free assets:
 
 - [Industry Tileset](https://0x72.itch.io/16x16-industrial-tileset)
+
+© Nathan Foote | 2023
